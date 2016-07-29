@@ -1,0 +1,337 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% the MOTTAZ LaTeX PREAMBLE (QUIZ) %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% v. 1.01 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%    Author: Anthony Mottaz
+%    Version: 1.01  (2016/04/03)
+%    Description: The MOTTAZ LaTeX PREAMBLES are a collection of preambles that
+%                 have been optimally designed for tasks that are of primary
+%                 concern to students and professors of mathematics.
+%                    This particular preamble, the 'QUIZ' edition, has been
+%                 optimized for creating quizzes. For a complete list and
+%                 descriptions of the features contained herein, refer to the
+%                 Usage Guide PDF document. For release notes and version
+%                 change logs, see 'quiz_changelog.log'.
+%                    Lots of time and thought has gone into creating the most
+%                 comprehensive and useful preamble possible, but the work is
+%                 never done. If you experience issues with this preamble or
+%                 have any suggestions for improvement, please contact me at
+%
+%                                 anthonywmottaz@gmail.com
+%
+%                 Happy TeXing!
+%                 - A.M.
+%
+%    HOW TO USE: At the beginning of your document, after '\documentclass[•]{•}'
+%                add '\input{path/to/quiz_preamble.tex}' where
+%                'path/to/quiz_preamble.tex'
+%                is the location of the 'quiz_preamble.tex' file on your system.
+%
+%    LICENSE:    This project is released under the LaTeX Project Public
+%                License, v1.3c or later. See
+%
+%                          http://www.latex-project.org/lppl.txt
+%
+%
+% The following is for use with 'mylatexformat'
+%\documentclass[letterpaper]{article}
+%-------------------------------------------------------------------------------
+%             PAGE LAYOUT                                                      |
+%-------------------------------------------------------------------------------
+%
+\usepackage{layout}
+%
+%   The following section defines the page layout for the document. Notice that
+%   every defined length is based on either the size of the page or the size of 
+%   the font. This is so that any choice in paper size and font results in a
+%   similar layout. To understand the motivation behind these dimension choices,
+%   refer to the Usage Guide.
+%
+\usepackage{geometry}
+\geometry{
+    hdivide={1in,*,1in},
+    vdivide={0.75in,*,1in},
+    nohead,
+    nofoot,
+    nomarginpar
+}
+%
+%-------------------------------------------------------------------------------
+%             LOAD ALL OF THE PACKAGES                                         |
+%-------------------------------------------------------------------------------
+%
+%   This is where we load all of the packages that may be useful in creating
+%   your document. Refer to the Usage Guide for thorough information on the
+%   application of each package.
+%
+%   WARNING: Do not change the order in which these packages are loaded. Doing
+%            so may result in errors.
+%
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{mathrsfs}
+\usepackage{cancel}
+\usepackage[shortlabels]{enumitem}
+\usepackage{array}
+    \setlength{\extrarowheight}{1pt}
+\usepackage{arydshln}
+\usepackage{relsize}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+    \usetikzlibrary{shapes}
+    \usetikzlibrary{arrows}
+\usepackage{pgfplots}
+    \pgfplotsset{compat = 1.10}% You may use a later version, if you wish.
+    \usepgfplotslibrary{fillbetween}
+\usepackage{needspace}
+\usepackage[textwidth = 0.9\marginparwidth]{todonotes}
+\usepackage{fancyhdr}
+\usepackage[parfill]{parskip}
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    linkbordercolor=white,
+    urlcolor=blue,
+    unicode
+    ]{hyperref}
+\usepackage{cleveref}
+\usepackage{framed}
+\usepackage{wasysym}
+\usepackage{lipsum}
+\usepackage{alphalph}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{textgreek}
+\usepackage{upgreek}
+\usepackage{signchart}
+\usepackage{microtype}
+\usepackage{multicol}
+\usepackage{tikz-cd}
+%
+%-------------------------------------------------------------------------------
+%             MATH-SPECIFIC COMMANDS, OPERATORS, AND DEFINITIONS               |
+%-------------------------------------------------------------------------------
+%
+%----- DOUBLE STROKE CHARACTERS -----%
+\newcommand{\N}{\mathds{N}}            % Naturals
+\newcommand{\Z}{\mathds{Z}}            % Integers
+\newcommand{\Q}{\mathds{Q}}            % Rationals
+\newcommand{\R}{\mathds{R}}            % Reals
+\renewcommand{\C}{\mathds{C}}          % Complex numbers
+\renewcommand{\H}{\mathds{H}}          % Quaternions (Hamiltonions)
+\newcommand{\F}{\mathds{F}}            % Generic field
+%
+%----- AUTOMATICALLY SCALED DELIMITERS -----%
+\DeclarePairedDelimiter{\paren}{(}{)}%                                  ( )
+\DeclarePairedDelimiter{\ang}{\langle}{\rangle}%                        < >
+\DeclarePairedDelimiter{\brc}{\{}{\}}%                                  { }
+\DeclarePairedDelimiter{\brkt}{[}{]}%                                   [ ]
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}%                          | |
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}%                        || ||
+\renewcommand{\mid}{\mkern4mu\middle\vert\mkern4mu}
+%
+% Swap the definition of starred and non-starred versions.
+% Non-starred delimeters will auto-scale, and starred versions will not.
+\makeatletter
+% \paren
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+% \ang
+\let\oldang\ang
+\def\ang{\@ifstar{\oldang}{\oldang*}}
+% \brc
+\let\oldbrc\brc
+\def\brc{\@ifstar{\oldbrc}{\oldbrc*}}
+% \brkt
+\let\oldbrkt\brkt
+\def\brkt{\@ifstar{\oldbrkt}{\oldbrkt*}}
+% \abs
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+% \norm
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+%
+%----- FUNCTIONS -----%
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}      % Ceiling function
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}   % Floor function
+\renewcommand{\bar}[1]{                                 % The complex conjugate
+    \mkern 1mu\overline{\mkern-1mu#1\mkern-1mu}}
+%
+%----- OPERATORS -----%
+\newcommand{\iso}{\cong}                   % The 'is isomorphic to' symbol
+\newcommand{\nsg}{\unlhd}                  % The 'normal subgroup' symbol
+\newcommand{\rnsg}{\unrhd}                 % Reversed 'normal subgroup' symbol
+\newcommand{\nnsg}{\ntrianglelefteq}       % Negated 'normal subgroup' symbol
+\newcommand{\del}{\nabla}                  % The 'del', or 'gradient' operator
+\DeclareMathOperator{\ord}{ord}            % Order
+\DeclareMathOperator{\sgn}{sgn}            % Sign function
+\DeclareMathOperator{\lcm}{lcm}            % Least common multiple
+\DeclareMathOperator{\aut}{Aut}            % Group of automorphisms
+\DeclareMathOperator{\inn}{Inn}            % Group of inner automorphisms
+\DeclareMathOperator{\sym}{Sym}            % Symmetric group
+\DeclareMathOperator{\id}{id}              % Identity operator
+\DeclareMathOperator{\img}{Im}             % Image of a function
+\DeclareMathOperator{\stab}{Stab}          % Stabilizer
+\DeclareMathOperator{\orb}{Orb}            % Orbit
+\DeclareMathOperator{\cl}{C\ell}           % Conjugacy class
+\DeclareMathOperator{\core}{core}          % Core
+\DeclareMathOperator{\syl}{Syl}            % Sylow group
+\DeclareMathOperator{\cha}{char}           % Characteristic
+\DeclareMathOperator{\tr}{tr}              % Trace of a matrix
+\DeclareMathOperator{\fun}{Fun}            % Set of functions
+\DeclareMathOperator{\cis}{cis}            % Cos + i Sin
+\DeclareMathOperator{\Arg}{Arg}            % Principal argument
+\DeclareMathOperator{\Frac}{Frac}          % Field of fractions
+\DeclareMathOperator{\ann}{Ann}            % Annihilator
+\DeclareMathOperator{\tor}{Tor}            % Torsion set
+\DeclareMathOperator{\End}{End}            % Set of endomorphisms
+\DeclareMathOperator{\Hom}{Hom}            % Set of homomorphisms
+\DeclareMathOperator{\soc}{Soc}            % The socle of a module
+\renewcommand{\limsup}{\varlimsup}         % Limit superior
+\renewcommand{\liminf}{\varliminf}         % Limit inferior
+\renewcommand{\Re}{\operatorname{Re}}      % Real part
+\renewcommand{\Im}{\operatorname{Im}}      % Imaginary part
+% Upper integral
+\def\upint{\mathchoice
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    \int}
+% Lower integral
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+\newcommand{\dsum}{\displaystyle\sum\limits}% Like \dfrac, but for inline sums
+% Big 'boxplus' symbol
+\newcommand{\bigboxplus}{%
+  \mathop{%
+    \mathchoice{\dobigboxplus\Large}%
+               {\dobigboxplus\large}
+               {\dobigboxplus\normalsize}
+               {\dobigboxplus\small}
+    }\displaylimits
+}
+%
+\newcommand{\dobigboxplus}[1]{%
+\vcenter{#1\kern.2ex\hbox{$\boxplus$}\kern.2ex}}
+% 'Divides' relation
+\newcommand{\divides}{\bigm|}
+\newcommand{\ndivides}{%
+  \mathrel{\mkern.5mu % small adjustment
+    % superimpose \nmid to \big|
+    \ooalign{\hidewidth$\big|$\hidewidth\cr$\nmid$\cr}%
+  }%
+}
+%
+%----- UNCATEGORIZED -----%
+%   I want math inside of \textbf{•} to also be bolded font
+\DeclareTextFontCommand{\textbf}{\boldmath\bfseries}
+%
+%   You can create your own fraction-like commands using '\genfrac'. This takes
+%   6 inputs:
+%      1. left delimiter
+%      2. right delimiter
+%      3. fraction bar line thickness
+%      4. mathstyle size override:
+%         0--displaystyle, 1--textstyle, 2--scriptstyle, 3--scriptscriptstyle
+%      5. numerator content
+%      6. denominator content
+%
+%-------------------------------------------------------------------------------
+%             THEOREM STYLES                                                   |
+%-------------------------------------------------------------------------------
+%
+%   Here we define a couple of custom styles for theorem-like environments.
+%   Refer to the 'amsthm' documentation for an explanation of how this is done.
+%
+%----- DEFINE THE STYLES -----%
+%
+\newtheoremstyle{first_style}
+    {\baselineskip}
+    {0.7\baselineskip}
+    {\normalfont}
+    {}
+    {\bfseries}
+    {:}
+    {0.5em}
+    {}
+\newtheoremstyle{second_style}
+    {1ex}
+    {-0.5\baselineskip}
+    {\normalfont}
+    {}
+    {\slshape\bfseries}
+    {:}
+    {0.25em}
+    {}
+%----- DEFINE THE ENVIRONMENTS -----%        
+\theoremstyle{first_style}
+    \newtheorem*{defn}{Definition}
+    \newtheorem*{exmp}{Example}
+    \newtheorem*{sol}{Solution}
+    \newtheorem*{case}{Case}
+\theoremstyle{second_style}
+    \newtheorem*{note}{Note}
+%
+%-------------------------------------------------------------------------------
+%             THE HEADER                                                       |
+%-------------------------------------------------------------------------------
+%
+%   Use the commands '\coursetitle{•}' and '\quiztitle{•}' to set the course
+%   title and quiz titles, respectively. These are placed on the left side at
+%   the top of the page, and a blank 'Name' space on the right.
+%
+\newcommand{\cn}{<Course Title>}
+\newcommand{\qt}{<Quiz Title>}
+\newcommand{\coursetitle}[1]{\renewcommand{\cn}{#1}}
+\newcommand{\quiztitle}[1]{\renewcommand{\qt}{#1}}
+% Set the pagestyle to suppress page numbers.
+\pagestyle{empty}
+% Commands to populate the top of the page.
+\newcommand{\makeheader}{
+    \textbf{\cn} \hfill \textbf{Name:} \rule{3in}{1pt} \par
+    \textbf{\qt}}
+%
+%-------------------------------------------------------------------------------
+%             UNCATEGORIZED FEATURES                                           |
+%-------------------------------------------------------------------------------
+%
+%----- DARK THEME -----%
+%
+%   Here I provide the command '\darktheme' to turn your output PDF completely
+%   dark. This lowers eye strain when editing documents for long time periods.
+\newcommand{\darktheme}{
+    \pagecolor[rgb]{0.1,0.1,0.1}
+    \color[rgb]{0.95,0.95,0.95}
+}
+%
+%----- CIRCLED -----%
+%
+%   If you want something circled, this will do it nicely.
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{%
+    \node[shape=ellipse,draw,inner sep=1pt] (char) {#1};}}
+%
+%----- MARGIN ALIGN -----%
+%
+%   If you want item labels aligned at the margins, use
+%   \begin{enumerate}[align=margin,labelsep=0pt]
+\SetLabelAlign{margin}{\llap{#1~~}}
+%
+%----- MARGIN PARAGRAPHS -----%
+\newcommand{\mpar}[1]{\marginpar{\footnotesize#1}}
+%
+%----- POINTS -----%
+%
+%   Use the '\points{#}' command to tell the quiz-taker how many points a
+%   certain question is worth.
+\newcommand{\points}[1]{\texttt{(#1 points)}}
+%
+% The following is for use with 'mylatexformat'
+%\csname endofdump\endcsname

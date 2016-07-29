@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% THE MOTTAZ PREAMBLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Created by: Tony Mottaz
+%% Description: This is my customized preamble with which I write all of my homework assignments.
+%% It is ever-expanding to fit new and nitpicky uses.
+
+%% Current version: 1.0
+%% Published to: Copy.com
+%% Publish Date: 10/8/2015
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% GOALS FOR THE FUTURE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% -- Redevelop into a document class rather than a preamble
+% -- Create other preambles based on this one for other uses
+
+%% HOW TO USE: Include the line '\input{/path/to/preamble.tex}' before '\begin{document}' in your .tex file
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SET THE LAYOUT OF THE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE: This layout assumes that the user is using the letterpaper size. Specify this by using
+%		\documentclass[letterpaper]{•} 
+%		at the beginning of your .tex document.
+
+\usepackage{layout}
+\hoffset 0.25in
+\voffset 0pt
+\oddsidemargin 0pt
+\topmargin 0pt
+\headheight 12pt
+\headsep 25pt
+\textheight 600pt
+\textwidth 6in
+\marginparwidth 85pt
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{mathtools,amsthm,amssymb}	% For basic math typesetting needs
+\usepackage{dsfont,mathrsfs}			% For double stroke fonts (\mathds{•}) and math script fonts (\mathscr{•})
+\usepackage[textwidth=0.9\marginparwidth]{todonotes} % For todo notes in the margin, plus other features (refer to the documentation)
+\usepackage{fancyhdr}					% Creates the fancy header
+\usepackage{cancel}						% Math package to show cancellation
+\usepackage{parskip}					% New paragraphs skip a line rather than indent
+\usepackage{enumerate}					% For custom enumerations (refer to documentation)
+\usepackage[colorlinks=true,linkcolor=blue,linkbordercolor=white]{hyperref}	% Creates hyperlinks
+\usepackage{xcolor}						% Extended coloring options (refer to documentation)
+\usepackage{relsize}					% Can change size of math (refer to documentation)
+\usepackage{tikz,pgfplots}				% The Tikz package is utilized for creating mathematical images, and PGFPlots provides tools for creating graphs
+\pgfplotsset{compat=1.9}				% This gives PGFPlots backwards compatibility
+\usepackage{framed}						% Framed environment puts a box around its contents (refer to documentation)
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% USER DEFINED FOOTNOTE SYMBOLS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% WARNING: If the user needs more footnote symbols on a page than are listed here, there will be an error. To add another symbol, add '\or\symbol' to the string below.
+
+\makeatletter
+\newcommand*{\wackyfn}[1]{%
+  \expandafter\@wackyfn\csname c@#1\endcsname%
+}
+
+\newcommand*{\@wackyfn}[1]{
+	%~Add your symbol below this line~%
+  $\ifcase#1 \or\dag\or\ddag%
+    \else\@ctrerr\fi$
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% USER DEFINED COMMANDS & MATH OPERATORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Shortcuts for double stroke characters
+\newcommand{\N}{\mathds{N}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Q}{\mathds{Q}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\C}{\mathds{C}}
+\newcommand{\F}{\mathds{F}}
+
+% Various mathematical delimeters and reassignment of operators
+\newcommand{\ang}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+\newcommand{\iso}{\cong}
+\newcommand{\nsg}{\unlhd}
+\newcommand{\rnsg}{\unrhd}
+\newcommand{\nnsg}{\ntrianglelefteq}
+\renewcommand{\limsup}{\overline{\lim}\,}
+\renewcommand{\liminf}{\underline{\lim}\,}
+\newcommand*{\myfrac}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+
+% User defined math operators
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\img}{Im}
+
+% Use the footnote symbols defined above
+% Comment out the following two lines to use default footnote symbols
+\renewcommand\thefootnote{\wackyfn{footnote}}
+\makeatother
+
+% I want math inside of the \textbf{•} command to also be bold
+\DeclareTextFontCommand{\textbf}{\boldmath\bfseries}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% THEOREM STYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% REFER TO the amsthm documentation for further explanation.
+
+% First define the styles.
+\newtheoremstyle{first_style} 		% name
+    {\topsep}                    	% Space above
+    {\topsep}                    	% Space below
+    {\slshape}                		% Body font
+    {}                           	% Indent amount
+    {\bfseries}                  	% Theorem head font
+    {.}              				% Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
+    {}  						  	% Theorem head spec (can be left empty, meaning *normal*)
+    
+\newtheoremstyle{second_style} 		% name
+    {5pt}                    		% Space above
+    {\topsep}                    	% Space below
+    {\normalfont}                	% Body font
+    {}                           	% Indent amount
+    {\bfseries}                  	% Theorem head font
+    {:}              				% Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
+    {}  						  	% Theorem head spec (can be left empty, meaning *normal*)
+    
+\newtheoremstyle{third_style} 		% name
+    {\topsep}                    	% Space above
+    {\topsep}                    	% Space below
+    {\normalfont}                	% Body font
+    {}                           	% Indent amount
+    {\slshape}                  	% Theorem head font
+    {$\,\rightarrow$}              	% Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
+    {}  						 	% Theorem head spec (can be left empty, meaning *normal*)
+    
+% Now define the theorem environments based on these styles.
+\theoremstyle{first_style}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{second_style}
+\newtheorem*{defn}{Definition}
+\newtheorem*{exmp}{Example}
+\newtheorem*{sol}{Solution}
+
+\theoremstyle{third_style}
+\newtheorem*{note}{Note}
+\newtheorem*{claim}{Claim}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DEFINE HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{<Course Title>}
+\chead{<Assignment Title>}
+\rhead{Tony Mottaz}		% Replace with your name
+\pagestyle{fancy}

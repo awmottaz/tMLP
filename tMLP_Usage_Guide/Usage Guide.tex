@@ -1,0 +1,845 @@
+\documentclass[letterpaper,12pt]{article}
+
+\input{/home/tony/Documents/preamble.tex}
+
+\coursetitle{}
+\hwtitle{the Mottaz Standard \LaTeX\ Preamble: An Introduction}
+\myname{}
+
+\title{\vspace{-0.75in} \scshape the Mottaz Standard \LaTeX\ Preamble: \\ {\Large An Introduction} \vspace{-0.5\baselineskip}}
+\author{Tony Mottaz}
+\date{\vspace*{-0.5\baselineskip} Last updated: \today}
+
+\usepackage{hologo}
+
+\hypersetup{
+	pdftitle={the Mottaz Standard LaTeX Preamble: An Introduction},
+	pdfauthor={Tony Mottaz},
+	pdfsubject={LaTeX document development},
+	pdfcreator={Tony Mottaz},
+	pdfproducer={Tony Mottaz},
+	pdfkeywords={TeX, LaTeX, Mathematics}
+	}
+
+\definecolor{shadecolor}{RGB}{242,242,200}
+
+\newcommand{\myrule}[1]{\textcolor{#1}{\rule{0.7cm}{8pt}}}
+
+
+
+\begin{document}
+\thispagestyle{plain}
+\maketitle
+\vspace*{-30pt}
+\begin{center}
+\rule{0.9\textwidth}{2pt}
+\vspace*{-10pt}
+\rule{0.8\textwidth}{1pt}
+\end{center}
+\pdfbookmark[1]{\contentsname}{toc}
+\tableofcontents
+
+\newpage
+\section{Introduction}
+The beginning of every \LaTeX\ document has a preamble. If you write lots of documents in \LaTeX , chances are you have created your own dedicated \texttt{preamble.tex} file which you load into every document. As a graduate student in mathematics, I started making my own. As I discovered more and more ways to customize my document and make handy macros, my preamble started to grow. This preamble has become extremely useful for me, and I have put a lot of thought and effort into creating a comprehensive collection of packages and creation of macros which serve the purposes of math students and professors well.
+
+The \textsc{Mottaz Standard \LaTeX\ Preamble} is, in fact, a collection of preambles, each with their own specific use. These preambles are:
+
+\begin{itemize}
+	\item \texttt{HOMEWORK} edition
+	\item \texttt{QUIZ} edition
+\end{itemize}
+
+The present document is intended to serve as an introduction and usage guide for these preambles I have created. It is organized by first describing all packages and features that are similar to every preamble with sections near the end describing features that are specific to individual preambles. my audience/end-users are students and professors of mathematics who appreciate beautiful and professional looking documents.
+
+Please be sure to take a look at the \texttt{README} file that comes along with each preamble. In there you will find helpful information as well as a log of changes between each version.
+
+I have included here my list goals for the future of this project, how to utilize this preamble, and a warning about package related errors that you want to avoid.
+
+If you have any suggestions for changes/additions, or if you have problems/errors of any kind, please send me an email at:
+\begin{center}
+\texttt{anthonywmottaz@gmail.com}
+\end{center}
+
+Happy \TeX ing!
+
+\medskip
+{\slshape Anthony Mottaz \\ Graduate Assistant \\ Northern Illinois University}
+
+\newpage
+	\subsection{Goals for the future}
+	\begin{enumerate}[\bfseries I.]
+	
+	\item Redevelop this preamble into a \texttt{class} document.
+		
+		\begin{enumerate}[\bfseries i.]
+		
+		\item Create a key value option for alternative layout schemes, such as \texttt{oneside} vs \texttt{twoside}, different options for margins (such as a ``tight'' scheme), etc. Each scheme should be compatible with any chosen paper size.
+		
+		\item Create a key value option for disabling the \texttt{microtype} package if using an incompatible font
+	
+		\end{enumerate}
+	
+	\item Create a library of other preambles for other specific uses, such as
+	
+		\begin{enumerate}[\bfseries i.]
+		
+		\item Homework (which the current preamble does well)
+		
+		\item Creating solution guides for students
+		
+		\item Creating tests/quizzes (This project has begun)
+
+        \item Taking course notes
+		
+		\end{enumerate}
+	
+	\item Create a \verb|\randclosedloop| command for creating arbitrary 2-dimensional spaces in tikz pictures. \textsl{This project is underway... look for it in the near future!}
+	
+	\item Add a command similar to \verb|\layout| which will print a page of 
+	the unique commands offered by this preamble
+	
+	\item Utilize the \texttt{geometry} package for the page layout
+	
+	\item Rewrite this Usage Guide with the \texttt{ltxdoc} class
+	
+	\end{enumerate}
+
+\section{Basic usage}
+The following gives a guide of how to incorporate this preamble into your own \LaTeX\ documents. I have also included an important warning about potential errors the user might run into regarding the installation/loading of the numerous packages.
+
+	\subsection{Utilizing this preamble}
+	The use of a preamble is straightforward. Save the preambles to your system, and make note of their path. Note that the \texttt{HOMEWORK} edition is simply called \texttt{preamble.tex}, whereas the other editions have a prefix. For example, you may save the \texttt{HOMEWORK} edition preamble to something like
+	
+	\begin{verbatim}
+	C:Users/YourName/Documents/preamble.tex   (Windows)
+	/home/yourname/Documents/preamble.tex   (Linux)
+	\end{verbatim}
+	
+	A similar path should give you the \texttt{QUIZ} edition:
+	
+	\begin{verbatim}
+	C:Users/YourName/Documents/quiz_preamble.tex   (Windows)
+	/home/yourname/Documents/quiz_preamble.tex   (Linux)
+	\end{verbatim}
+	
+	Then in the preamble of your document, you will use the \verb|\input{}| command, filling in the path to your saved preamble. When your \texttt{.tex} file compiles, the preamble will be read as if it was actually typed right there in your document. Next, be sure to set the header variables\footnote{To see how this is done, go to the section corresponding to the preamble you are using.}. Here is a sample:
+	
+\Needspace*{11\baselineskip}
+	\begin{Verbatim}[frame=single,gobble=1,fontsize=\small,numbers=left]
+	\documentclass[letterpaper]{article}
+	
+	\input{/home/yourname/Documents/preamble.tex}
+	\coursetitle{Math Class}
+	\hwtitle{Homework \#1}
+	\myname{Joe Schmö}
+	
+	\begin{document}
+	    ...
+	\end{Verbatim}
+	
+	\subsection{Avoid package related errors}
+	The preamble loads many packages. It is important that you follow these guidelines to avoid errors in your document. First, there may be some packages which you do not already have installed on your system. Refer to the \texttt{README} for an up-to-date list of these. If you are using the \hologo{MiKTeX} package manager (recommended for Windows systems), then just run a search for these packages and install them\footnote{A few packages, such as my \texttt{signchart} package, may need to be downloaded from the CTAN archive.}. If you are using the \TeX\ Live package manager (recommended for Linux systems), then go into a terminal and type
+	
+	\begin{Verbatim}[gobble=1,fontsize=\small]
+	sudo tlmgr install packagename
+	\end{Verbatim}
+	
+	to install the package \texttt{packagename}. Now that you have all of the necessary packages installed, it is important that you \emph{do not change the order in which they are loaded.} Some packages depend on other packages, and some packages load other packages on their own. If there are specific options that are requested from a certain package, then the package needs to be loaded with those options before another package loads it. If these packages are not loaded in the correct order, you will see an ``\texttt{option clash}'' error.
+	
+\section{The loaded packages}
+The following is a list of packages that are loaded into the preamble along with a description of what the package does and perhaps an example of its usage. This list is rather long, and it is growing. You may be a minimalist and think that it is silly to load so many things every time, when maybe there are several packages you rarely use. I keep them all here for two reasons: (1) Since we live in the modern age of incredible processor speeds, I do not see any lag in the time it takes to compile a document, so from that standpoint I do not have any motivation to minimize this list. (2) Even though some features are used rarely, it is nice to have them there when you need them.
+
+\begin{center}
+\textsl{Click on the package name to open the documentation in your browser.}
+\end{center}
+
+\bigskip
+
+\begin{description}[align=margin,labelsep=0pt,leftmargin=0pt,style=multiline,labelwidth=63pt]
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{layout}}
+\item[\href{http://mirror.utexas.edu/ctan/macros/latex/required/tools/layout.pdf}{\texttt{layout}}] This package gives the command \verb|\layout| which prints a diagram showing the current layout of the document. The output for this document is shows in appendix \ref{layout}.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{lmodern}}
+\item[\href{http://www.ctan.org/tex-archive/fonts/lm/}{\texttt{lmodern}}]
+This package provides the Latin Modern font --- and enhanced version of the \href{http://www.ctan.org/tex-archive/fonts/cm/}{Computer Modern} fonts with extended glyph coverage and enhanced metrics.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{fontenc}}
+\item[\href{http://www.ctan.org/pkg/fontenc}{\texttt{fontenc}}]
+This package is a standard for changing the font encodings in the output PDF document. It is loaded as usual with the \texttt{T1} option, specifying the use of T1 encoding.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{inputenc}}
+\item[\href{http://www.ctan.org/pkg/inputenc}{\texttt{inputenc}}]
+This package, loaded with the \texttt{UTF-8} option, allows \LaTeX\ to read and understand special characters from your source document. For example, if you insert the character `ö' into your source document, it will give the expected output in your PDF.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{mathtools}}
+\item[\href{http://get-software.net/macros/latex/contrib/mathtools/mathtools.pdf}{\texttt{mathtools}}] The \texttt{mathtools} package offers all of the same features as the \href{http://mirror.jmu.edu/pub/CTAN/macros/latex/required/amslatex/math/amsldoc.pdf}{\texttt{amsmath}} package, along with additional features and math characters, such as the ``colon equals'' symbol $\coloneqq$ which I use frequently. It also allows for ``cramped'' math. For example, the \verb|\cramped{}| command changes $2^{2^2}$ to $\cramped{2^{2^2}}$. There are many other nice features offered by this package.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{amsthm}}
+\item[\href{http://mirror.jmu.edu/pub/CTAN/macros/latex/required/amslatex/amscls/doc/amsthdoc.pdf}{\texttt{amsthm}}] This package provides the \texttt{theorem} and \texttt{proof} environment, as well as tools for building your own theorem-like environments. To see how to define your own theorem-like environment, look at section \ref{thmstyles}.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{amssymb}}
+\item[\href{http://ctan.math.utah.edu/ctan/tex-archive/fonts/amsfonts/doc/amsfndoc.pdf}{\texttt{amssymb}}] This package offers additional symbols to use in math mode. A complete list of these symbols can be found \href{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}{here}.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{dsfont}}
+\item[\href{http://ctan.mirrors.hoobly.com/fonts/doublestroke/dsdoc.pdf}{\texttt{dsfont}}] This package loads the double stroke letters which are used for representing the natural numbers, the integers, the rationals, the reals, the complex numbers, the Quaternions (Hamiltonians), and a general field. The preamble also defines macros to access these symbols easily. Those macros and their output are as follows:
+
+\begin{center}
+\begin{tabular}{c|c}
+Command & Output \\ \hline
+\verb|\N| & $\N$ \\
+\verb|\Z| & $\Z$ \\
+\verb|\Q| & $\Q$ \\
+\verb|\R| & $\R$ \\
+\verb|\C| & $\C$ \\
+\verb|\H| & $\H$ \\
+\verb|\F| & $\F$ \\
+\end{tabular}
+\end{center}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{mathrsfs}}
+\item[\href{http://ftp.math.purdue.edu/mirrors/ctan.org/macros/latex/contrib/jknappen/mathrsfs.rme}{\texttt{mathrsfs}}] This package provides script lettering using the \verb|\mathscr{}| command. For example, \verb|\mathscr{ABC}| produces $\mathscr{ABC}$.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{cancel}}
+\item[\href{http://mirrors.concertpass.com/tex-archive/macros/latex/contrib/cancel/cancel.pdf}{\texttt{cancel}}] This package offers the \verb|\cancel{}| and \verb|\cancelto{}{}| commands (and a few others) which nicely draw a line through math expressions, and possibly draws an arrow to another value. For example, the code
+
+\Needspace*{4\baselineskip}
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\[ \frac{x^2 - 4}{x+2}
+= \frac{(x - 2)\cancelto{1}{(x + 2)}}{\cancel{x + 2}}
+= x - 2. \]
+\end{Verbatim}
+will produce
+\Needspace*{1in}
+\begin{shaded*}
+\[ \frac{x^2 - 4}{x+2}
+= \frac{(x - 2)\cancelto{1}{(x + 2)}}{\cancel{x + 2}}
+= x - 2. \]
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{enumitem}}
+\item[\href{http://ctan.mirrors.hoobly.com/macros/latex/contrib/enumitem/enumitem.pdf}{\texttt{enumitem}}] This package allows for total customization control over list environments. This package is loaded with the \texttt{shortlabels} option so that the item labels can be customized easily by selecting \texttt{A}, \texttt{a}, \texttt{I}, \texttt{i}, or \texttt{1} and inserting whatever delimiters you want. For example, the code
+
+\Needspace*{6\baselineskip}
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\begin{enumerate}[\bfseries a.]
+	\item First item
+	\item Second item
+	\item Third item
+\end{enumerate}
+\end{Verbatim}
+will produce
+\Needspace*{6\baselineskip}
+\begin{shaded*}
+\begin{enumerate}[\bfseries a., labelsep=*]
+	\item First item
+	\item Second item
+	\item Third item
+\end{enumerate}
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{array}}
+\item[\href{http://mirrors.concertpass.com/tex-archive/macros/latex/required/tools/array.pdf}{\texttt{array}}] This package offers many helpful customization tools for \texttt{tabular} and \texttt{array} environments. This preamble uses the \verb|\extrarowheight| parameter to add some height to each row in a \texttt{tabular} or \texttt{array} environment. Usually, if horizontal lines are used, then capital letters may touch the lines. This preamble defines \verb|\extrarowheight| to be \texttt{2pt}, which gives enough buffer for letters to have space between horizontal lines and still look natural. Here is an example:
+
+\Needspace*{1in}
+\begin{shaded*}
+\begin{center}
+\setlength{\extrarowheight}{0pt}
+\begin{tabular}{|c|}
+\hline
+I FEEL A LITTLE SQUISHED \\ \hline
+\end{tabular} \\[1em]
+\setlength{\extrarowheight}{2pt}
+\begin{tabular}{|c|}
+\hline
+THIS IS BETTER \\ \hline
+\end{tabular}
+\end{center}
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{arydshln}}
+\item[\href{http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/arydshln/arydshln-man.pdf}{\texttt{arydshln}}] This package (say to yourself ``array dashed lines'') allows the user to use dashed lines in \texttt{tabular} and \texttt{array} environments. For vertical dashed lines, use the \texttt{:} option in place of \texttt{|}. For horizontal dashed lines, use \verb|\hdashline| in place of \verb|\hline|. For example, the code
+
+\Needspace*{5\baselineskip}
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\begin{tabular}{::l:c|r||}
+Here is & an & example \\ \hdashline
+Using & dashed & lines \\ \hline
+\end{tabular}
+\end{Verbatim}
+
+will produce
+
+\Needspace*{1in}
+\begin{shaded*}
+\begin{center}
+\begin{tabular}{::l:c|r||}
+Here is & an & example \\ \hdashline
+Using & dashed & lines \\ \hline
+\end{tabular}
+\end{center}
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{relsize}}
+\item[\href{http://mirror.hmc.edu/ctan/macros/latex/contrib/relsize/relsize-doc.pdf}{\texttt{relsize}}] This package allows the user to change the size of math or text relative to what the current size is. For example, you have the following expression
+\Needspace*{1in}
+\begin{shaded*}
+\[ \frac{x + \frac{3}{2e^y}}{x^{2y-1}} \]
+\end{shaded*}
+it would be nice if everything was typeset a little larger so that you can see the fractions and exponents better. Just put the whole expression inside of the \verb|\mathlarger{}| command. For example, the code
+
+\Needspace*{3\baselineskip}
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\[ \mathlarger{
+	\frac{x + \frac{3}{2e^y}}{x^{2y-1}}
+	} \]
+\end{Verbatim}
+
+will produce the following change:
+
+\Needspace*{1in}
+\begin{shaded*}
+\[ \frac{x + \frac{3}{2e^y}}{x^{2y-1}} \qquad{\longrightarrow}\qquad
+\mathlarger{
+	\frac{x + \frac{3}{2e^y}}{x^{2y-1}}
+	} \]
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{xcolor}}
+\item[\href{http://mirror.unl.edu/ctan/macros/latex/contrib/xcolor/xcolor.pdf}{\texttt{xcolor}}] This package gives the user access to a wider range of predefined colors, as well as several options for defining your own colors. This package is loaded with the \texttt{dvipsnames} option to load the 68 standard colors known to \texttt{dvips}:
+
+\begin{center}
+\small \ttfamily
+\begin{tabular}{| l | p{0.7cm} || l | p{0.7cm} || l | p{0.7cm} |}
+\hline
+Name & Col & Name & Col & Name & Col \\ \hline \hline
+Apricot & \myrule{Apricot} & Aquamarine & \myrule{Aquamarine} & Bittersweet & \myrule{Bittersweet} \\ \hline
+Black & \myrule{Black} & Blue & \myrule{Blue} & BlueGreen & \myrule{BlueGreen} \\ \hline
+BlueViolet & \myrule{BlueViolet} & BrickRed & \myrule{BrickRed} & Brown & \myrule{Brown} \\ \hline
+BurntOrange & \myrule{BurntOrange} & CadetBlue & \myrule{CadetBlue} & CarnationPink & \myrule{CarnationPink} \\ \hline
+Cerulean & \myrule{Cerulean} & CornflowerBlue & \myrule{CornflowerBlue} & Cyan & \myrule{Cyan} \\ \hline
+Dandelion & \myrule{Dandelion} & DarkOrchid & \myrule{DarkOrchid} & Emerald & \myrule{Emerald} \\ \hline
+ForestGreen & \myrule{ForestGreen} & Fuchsia & \myrule{Fuchsia} & Goldenrod & \myrule{Goldenrod} \\ \hline
+Gray & \myrule{Gray} & Green & \myrule{Green} & GreenYellow & \myrule{GreenYellow} \\ \hline
+JungleGreen & \myrule{JungleGreen} & Lavender & \myrule{Lavender} & LimeGreen & \myrule{LimeGreen} \\ \hline
+Magenta & \myrule{Magenta} & Mahogany & \myrule{Mahogany} & Maroon & \myrule{Maroon} \\ \hline
+Melon & \myrule{Melon} & MidnightBlue & \myrule{MidnightBlue} & Mulberry & \myrule{Mulberry} \\ \hline
+NavyBlue & \myrule{NavyBlue} & OliveGreen & \myrule{OliveGreen} & Orange & \myrule{Orange} \\ \hline
+OrangeRed & \myrule{OrangeRed} & Orchid & \myrule{Orchid} & Peach & \myrule{Peach} \\ \hline
+Periwinkle & \myrule{Periwinkle} & PineGreen & \myrule{PineGreen} & Plum & \myrule{Plum} \\ \hline
+ProcessBlue & \myrule{ProcessBlue} & Purple & \myrule{Purple} & RawSienna & \myrule{RawSienna} \\ \hline
+Red & \myrule{Red} & RedOrange & \myrule{RedOrange} & RedViolet & \myrule{RedViolet} \\ \hline
+Rhodamine & \myrule{Rhodamine} & RoyalBlue & \myrule{RoyalBlue} & RoyalPurple & \myrule{RoyalPurple} \\ \hline
+RubineRed & \myrule{RubineRed} & Salmon & \myrule{Salmon} & SeaGreen & \myrule{SeaGreen} \\ \hline
+Sepia & \myrule{Sepia} & SkyBlue & \myrule{SkyBlue} & SpringGreen & \myrule{SpringGreen} \\ \hline
+Tan & \myrule{Tan} & TealBlue & \myrule{TealBlue} & Thistle & \myrule{Thistle} \\ \hline
+Turquoise & \myrule{Turquoise} & Violet & \myrule{Violet} & VioletRed & \myrule{VioletRed} \\ \hline
+White & \myrule{White} & WildStrawberry & \myrule{WildStrawberry} & Yellow & \myrule{Yellow} \\ \hline
+YellowGreen & \myrule{YellowGreen} & YellowOrange & \myrule{YellowOrange} & & \\ \hline
+\end{tabular}
+\end{center}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{tikz}}
+\item[\href{http://www.texample.net/tikz/examples/}{\texttt{tikz}}] This package is essential for any \LaTeX\ users who wish to create any mathematical (or other) images. The link provided is for a site which provides an ever increasing gallery of examples of pictures created with \texttt{tikz}. I have also loaded the \texttt{tikz} library \texttt{shapes}, which is used in the definition of my \verb|\circled{}| command (see section \ref{circled})
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{pgfplots}}
+\item[\href{http://pgfplots.sourceforge.net/pgfplots.pdf}{\texttt{pgfplots}}] This package is an extension of \texttt{tikz} which provides a simple set of commands for producing plots and graphs. The command \\
+\verb|\pgfplotsset{compat = 1.10}| \\
+means that we are using version 1.10, and the command \\
+\verb|\usepgfplotslibrary{fillbetween}| \\
+loads a collection of commands which easily allow the user to add a shade color between curves on plot. A gallery of plots created with \texttt{PGFPlots} can be found \href{http://pgfplots.sourceforge.net/gallery.html}{here}.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{needspace}}
+\item[\href{http://mirror.hmc.edu/ctan/macros/latex/contrib/needspace/needspace.pdf}{\texttt{needspace}}] This package provides the \verb|\needspace{}| command. If the amount of space requested is not available on the current page, then a page break is inserted. This was used to redefine the \texttt{proof} environment. I don't care for proofs which have three or fewer lines at the end of a page, so the environment has been redefined using \\
+\verb|\Needspace*{4\baselineskip}|
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{todonotes}}
+\item[\href{http://mirrors.concertpass.com/tex-archive/macros/latex/contrib/todonotes/todonotes.pdf}{\texttt{todonotes}}] This package lets the user insert ``todo'' notes into their document using the \verb|\todo{}| command.\todo{Here is an example todo note.}\ This command places a colored note in the margin with a line pointing to the location of the note. The user can also insert a note inline with \verb|\todo[inline]{}|. \todo[inline]{Here is an inline note.}\ You can also insert a \verb|\listoftodos| anywhere in your document to keep track of all of your todo notes:
+\begin{shaded*}
+\listoftodos
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{fancyhdr}}
+\item[\href{http://ctan.mirrorcatalogs.com/macros/latex/contrib/fancyhdr/fancyhdr.pdf}{\texttt{fancyhdr}}] This package provides an addition \href{https://en.wikibooks.org/wiki/LaTeX/Page_Layout#Page_styles}{\texttt{pagestyle}} called \texttt{fancyhdr}, seen here in this document. There are three header locations (\texttt{lhead}, \texttt{chead}, \texttt{rhead}) and three footer locations (\texttt{lfoot}, \texttt{cfoot}, \texttt{rfoot}) where text may be placed, and a horizontal line spanning the width of the text is placed underneath the header.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{parskip}}
+\item[\href{http://mirror.hmc.edu/ctan/macros/latex/contrib/parskip/parskip-doc.pdf}{\texttt{parskip}}]
+ This package removes the indent from new paragraphs and instead adds a space 
+between them. In my opinion, this format is more aesthetically pleasing.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{imakeidx}}
+\item[\href{http://ctan.math.washington.edu/tex-archive/macros/latex/contrib/imakeidx/imakeidx.pdf}{\texttt{imakeidx}}]
+This package allows the user to create an index in their document. Refer to the 
+documentation for instructions on how to use this. \textbf{Important:} You will 
+need a new build sequence for compiling your document. After compiling the 
+source once using \texttt{latex} or \texttt{pdflatex}, you must run 
+\texttt{makeindex} on the \verb|\jobname.idx| file that is created, and then 
+run \texttt{(pdf)latex} again.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{hyperref}}
+\item[\href{http://ctan.sharelatex.com/tex-archive/macros/latex/contrib/hyperref/doc/manual.pdf}{\texttt{hyperref}}] This package inserts hyperlinks into your document. The table of contents, todo list, and other generated lists are automatically created with click-able links. Other links (such as the package name links here) are created with the command \verb|\href{}{}|, where the first argument is a URL, and the second argument is the text for the link. References to labeled objects are also automatically created as hyperlinks. This package is loaded with the \texttt{unicode} option so that Greek letters in section headings may be placed in the Adobe bookmarks.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{cleveref}}
+\item[\href{http://ctan.math.utah.edu/ctan/tex-archive/macros/latex/contrib/cleveref/cleveref.pdf}{\texttt{cleveref}}] This package offers additional hyperlink capabilities.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{framed}}
+\item[\href{http://get-software.net/macros/latex/contrib/framed/framed.pdf}{\texttt{framed}}] This package provides several environments, including the \texttt{framed} environment, which automatically draws a rectangle around everything inside, and the \texttt{shaded} environment which creates a shaded region containing the contents within the environment. Before using the \texttt{shaded} environment, the user needs to define the shade color. For example, the code
+
+\Needspace*{9\baselineskip}
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\begin{framed}
+	This content has a frame around it.
+\end{framed}
+
+\definecolor{shadecolor}{RGB}{181,230,216}
+\begin{shaded*}
+	This content is shaded.
+\end{shaded*}
+\end{Verbatim}
+
+will produce
+
+\Needspace*{6\baselineskip}
+\begin{shaded*}
+\setlength{\fboxsep}{9pt}
+\framebox[\textwidth][l]{This content has a frame around it.}
+\smallskip
+
+\definecolor{shadecolor}{RGB}{181,230,216}
+\begin{shaded*}
+	This content is shaded.
+\end{shaded*}
+\end{shaded*}
+\definecolor{shadecolor}{RGB}{242,242,200}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{wasysym}}
+\item[\href{http://mirrors.concertpass.com/tex-archive/macros/latex/contrib/wasysym/wasysym.pdf}{\texttt{wasysym}}] This package provides many additional symbols that can be used in a document. Refer to the documentation for a list of these symbols. For a well-maintained list of all available symbols in \LaTeX , look \href{http://mirror.utexas.edu/ctan/info/symbols/comprehensive/symbols-a4.pdf}{here}.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{lipsum}}
+\item[\href{http://mirror.utexas.edu/ctan/macros/latex/contrib/lipsum/lipsum.pdf}{\texttt{lipsum}}] This package allows the user to insert dummy text, which is helpful during the document creating process. There are 150 paragraphs of the \emph{Lorem ipsum} dummy text, and the user can access any range of these paragraphs using the \verb|\lipsum[]| command. For example, the code
+
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\lipsum[2]
+\end{Verbatim}
+
+will produce
+
+\Needspace*{10\baselineskip}
+\begin{shaded*}
+\lipsum[2]
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{alphalph}}
+\item[\href{http://mirrors.rit.edu/CTAN/macros/latex/contrib/oberdiek/alphalph.pdf}{\texttt{alphalph}}] This package gives additional enumeration options for sections, lists, etc. In particular, if a list of symbols is used for enumeration, then the symbols will be duplicated. This was implemented in my redefinition of the footnote symbols (see section \ref{footnotes} below).
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{pdfpages}}
+\item[\href{http://ctan.mirrorcatalogs.com/macros/latex/contrib/pdfpages/pdfpages.pdf}{\texttt{pdfpages}}] This package provides the \verb|\includepdf[]{}| command, which allows the user to easily insert selected pages of any PDF document. For example, the command
+
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\includepdf[pages=1-3,5]{SomeOtherThing.pdf}
+\end{Verbatim}
+will insert pages 1, 2, 3, and 5 of the PDF called ``\texttt{SomeOtherThing}'' directly into your document.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{float}}
+\item[\href{http://ctan.mackichan.com/macros/latex/contrib/float/float.pdf}{\texttt{float}}] This package gives some additional control over floats and figures, including the addition of a placement character \texttt{H}, which means ``put it here, no matter what''. Use with caution.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{tabularx}}
+\item[\href{http://mirror.hmc.edu/ctan/macros/latex/required/tools/tabularx.pdf}{\texttt{tabularx}}] This package provides the \texttt{tabularx} environment, which gives the user the ability to define the width of a table, and the width is added to columns labeled with the \texttt{X} specification. For example, the code
+
+\Needspace*{10\baselineskip}
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\begin{tabular}{| l | c | r |}
+\hline
+These columns & are scaled & to the text within. \\ \hline
+\end{tabular}
+
+\begin{tabularx}{\textwidth}{| l | X | r |}
+\hline
+The middle column & will & be expanded. \\ \hline
+\end{tabularx}
+\end{Verbatim}
+
+will produce
+
+\Needspace*{1in}
+\begin{shaded*}
+\begin{tabular}{| l | c | r |}
+\hline
+These columns & are scaled & to the text within. \\ \hline
+\end{tabular}
+
+\begin{tabularx}{\textwidth}{| l | X | r |}
+\hline
+The middle column & will & be expanded. \\ \hline
+\end{tabularx}
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{textgreek, upgreek}}
+\item[\href{http://mirrors.rit.edu/CTAN/macros/latex/contrib/textgreek/textgreek.pdf}{\texttt{textgreek}}, \\ \href{http://mirror.utexas.edu/ctan/macros/latex/contrib/was/upgreek.pdf}{\texttt{upgreek}}] These packages allow the user to insert upright Greek letters into text mode and math mode, respectively. For example, the normal Greek ``beta'' looks like $\beta$, but the upright ``beta'' looks like \textbeta. These upright letters are achieved in text mode using commands such as \verb|\textalpha| for lower case, or \verb|\textAlpha| for upper case. They are achieved in math mode using commands such as \verb|\upalpha| for lower case, or \verb|\Upalpha| for upper case.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{fancyvrb}}
+\item[\href{http://mirrors.concertpass.com/tex-archive/macros/latex/contrib/fancyvrb/fancyvrb.pdf}{\texttt{fancyvrb}}] This package allows the user to create fancy \texttt{Verbatim} environments, which have been used throughout this document. The user can specify different frames, shading, and text styles, as well as include line numbers, and more.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{signchart}}
+\item[\href{http://mirror.utexas.edu/ctan/macros/latex/contrib/signchart/signchart.pdf}{\texttt{signchart}}]
+This is a package developed by me to give the user the ability to easily insert nice sign charts. For example, the code
+
+\begin{Verbatim}[frame=single,gobble=0,fontsize=\small]
+\signchart{1,2,3}{+,-,+,-}
+\end{Verbatim}
+
+will produce
+
+\Needspace{4\baselineskip}
+\begin{shaded*}
+\signchart{1,2,3}{+,-,+,-}
+\end{shaded*}
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{microtype}}
+\item[\href{http://mirrors.concertpass.com/tex-archive/macros/latex/contrib/microtype/microtype.pdf}{\texttt{microtype}}]
+This package makes subtle changes to the size and placement of text in order to 
+enhance the appearance and readability of the document.
+
+
+\phantomsection
+\addcontentsline{toc}{subsection}{\texttt{multicol}}
+\item[\href{http://get-software.net/macros/latex/required/tools/multicol.pdf}{\texttt{multicol}}]
+This package allows the user to switch in and out of multiple column mode 
+without automatically starting a new page, and using balanced columns. By using 
+\verb|\begin{multicols}{n}|, the text will enter multiple column mode with $n$ 
+columns.
+
+\end{description}
+
+
+\section{Other features}
+This section outlines the features that are shared by every preamble.
+
+	\subsection{Bold math}
+	To insert bold text, one uses the \verb|\textbf{}| command. If math is inserted into this command, such as
+	
+	\begin{Verbatim}[frame=single,gobble=1,fontsize=\small]
+	\textbf{Let $\varepsilon > 0$ be given.}
+	\end{Verbatim}
+	
+	then the normal output will be
+	
+	\begin{shaded*}
+	\textbf{Let} $\varepsilon > 0$ \textbf{be given.}
+	\end{shaded*}
+	
+	I would like math to also become bold. This is achieved using with the following segment of code:
+	
+	\begin{Verbatim}[frame=single,gobble=1,fontsize=\small]
+	\DeclareTextFontCommand{\textbf}{\boldmath\bfseries}
+	\end{Verbatim}
+	
+	Now the same code as above will produce
+	
+	\begin{shaded*}
+	\textbf{Let $\varepsilon > 0$ be given.}
+	\end{shaded*}
+	
+	\subsection{Dark theme}
+	Many plain text editors offer a dark colored theme for decreasing eye strain while typing. Since generally about half of my screen is displaying the output PDF file of the \texttt{tex} document I am working on, I thought it would be nice to have a dark colored PDF until I had my finished product. Simply use the command \verb|\darktheme| in your preamble, and your output will look like this:
+	
+	\begin{center}
+	\includegraphics[width = 0.8\textwidth]{build/darkthemeEx.pdf}
+	\end{center}
+	
+	\subsection{Math-related commands}
+	There are many math-related commands that are specified for your convenience.
+	
+		\subsubsection{Auto-scaled delimiters}
+		Delimiters can be automatically scaled using the \verb|\left| and \verb|\right| commands. This has been automated for the following delimiters:
+		
+		\begin{center}
+		\begin{tabular}{c|c}
+		Command & Output \\ \hline
+		\verb|\paren{}| & $\paren{\cdot}$ \\
+		\verb|\ang{}| & $\ang{\cdot}$ \\
+		\verb|\brc{}| & $\brc{\cdot}$ \\
+		\verb|\brkt{}| & $\brkt{\cdot}$ \\
+		\verb|\abs{}| & $\abs{\cdot}$ \\
+		\verb|\norm{}| & $\norm{\cdot}$ \\
+		\end{tabular}
+		\end{center}
+		
+		\subsubsection{Special functions}
+		Macros are defined for the ceiling function, via \verb|\ceil{}|, and for the floor function, via \verb|\floor{}|.
+		
+		\subsubsection{Operators and other symbols}
+		The \texttt{amsmath} package provides the \verb|\DeclareMathOperator{}{}| command which allows us to define operators. The predefined operators here are:
+		
+		\begin{center}
+		\begin{tabular}{| p{0.6\textwidth} | c | c |}
+		\hline
+		\textbf{Description} & \textbf{Command} & \textbf{Output} \\
+		\hline \hline
+		Isomorphism & \verb|\iso| & $\iso$ \\ \hline
+		Normal subgroup & \verb|\nsg| & $\nsg$ \\ \hline
+		Reversed normal subgroup & \verb|\rnsg| & $\rnsg$ \\ \hline
+		Negated normal subgroup & \verb|\nnsg| & $\nnsg$ \\ \hline
+		Gradient, i.e. `del' operator & \verb|\del| & $\del$ \\ \hline
+		Complex conjugate & \verb|\bar{}| & $\bar{a}$ \\ \hline
+		The order of a set/element & \verb|\ord| & $\ord$ \\ \hline
+		The ``sign'' function & \verb|\sgn| & $\sgn$ \\ \hline
+		The least common multiple & \verb|\lcm| & $\lcm$ \\ \hline
+		The algebraic group of automorphisms & \verb|\aut| & $\aut$ \\ \hline
+		The algebraic group of inner automorphisms & \verb|\inn| & $\inn$ \\ 
+		\hline
+		The symmetric group & \verb|\sym| & $\sym$ \\ \hline
+		The identity operator & \verb|\id| & $\id$ \\ \hline
+		The image of a function & \verb|\img| & $\img$ \\ \hline
+		The stabilizer of an element under a group action & \verb|\stab| & 
+				$\stab$ \\ \hline
+				The orbit of an element under a group action & \verb|\orb| & 
+				$\orb$ \\ 
+				\hline
+				The conjugacy class & \verb|\cl| & $\cl$ \\ \hline
+		\end{tabular}
+		\end{center}
+		\begin{center}
+		\begin{tabular}{| p{0.6\textwidth} | c | c |}
+				\hline
+				\textbf{Description} & \textbf{Command} & \textbf{Output} \\
+				\hline \hline
+		The core & \verb|\core| & $\core$ \\ \hline
+		A Sylow group & \verb|\syl| & $\syl$ \\ \hline
+		The characteristic of a ring & \verb|\cha| & $\cha$ \\ \hline
+		The trace of a matrix & \verb|\tr| & $\tr$ \\ \hline
+		The set of all functions & \verb|\fun| & $\fun$ \\ \hline
+		$\cos + i\sin$ & \verb|\cis| & $\cis$ \\ \hline
+		Principal Argument of a complex number & \verb|\Arg| & $\Arg$ \\ \hline
+		Field of fractions & \verb|\Frac| & $\Frac$ \\ \hline
+		Annihilator & \verb|\ann| & $\ann$ \\ \hline
+		Torsion set & \verb|\tor| & $\tor$ \\ \hline
+		Set of endomorphisms & \verb|\End| & $\End$ \\ \hline
+		Limit superior & \verb|\limsup| & $\limsup$ \\ \hline
+		Limit inferior & \verb|\liminf| & $\liminf$ \\ \hline
+		Upper integral \rule{0pt}{15pt} & \verb|\upint| & $\upint$ \\ \hline
+		Lower integral \rule{0pt}{15pt} & \verb|\lowint| & $\lowint$ \\ \hline
+		Display-sized sum \rule{0pt}{15pt} & \verb|\dsum| & $\dsum$ \\ \hline
+		Big 'boxplus' symbol & \verb|\bigboxplus| & $\bigboxplus$ \\ \hline
+		
+		\end{tabular}
+		\end{center}
+		
+		I have also redefined the \verb|\Re| and \verb|\Im| commands so that instead of printing the fraktur $\mathfrak{R}$ and $\mathfrak{I}$, it prints $\Re$ and $\Im$.
+		
+		\subsection{Circled}
+		\label{circled}
+		By default, \LaTeX\ does not do a very good job circling text, so I 
+		created a command \verb|\circled{}| which will place a nice 
+		circle around text. Examples: \circled{4}, \circled{$e^x$}, 
+		\circled{long string}
+		
+		\subsection{Margin text}
+		\marginpar{Here is a sample set of text using the old command. Notice 
+		how often line breaks occur and how annoying it is to read. You are 
+		also more likely to get \texttt{underfull hbox} errors here.}
+		I have created a command \verb|\mpar{}| as a substitute for 
+		\verb|\marginpar{}|. The only difference is that the text is set to 
+		\verb|\footnotesize|.\mpar{\rule{0pt}{1cm}Here is a sample set of text 
+		in the margin using the new command. Isn't this much nicer to read than 
+		the example above? Now line breaks occur less often, and eye strain is 
+		reduced.}
+
+
+\section{Features in the \texttt{HOMEWORK} edition}
+This section outlines the features that are unique to the \texttt{HOMEWORK} edition.
+
+	\subsection{Page layout}
+	The layout of each page is defined as such:
+	\begin{Verbatim}[frame=single,gobble=1,fontsize=\small]
+	\hoffset 0.06\paperwidth
+	\voffset -0.025\paperheight
+	\oddsidemargin 0pt
+	\topmargin 0pt
+	\headheight 1.3em
+	\headsep 1.3em
+	\textheight 0.78\paperheight
+	\textwidth 0.59\paperwidth
+	\marginparsep 1.5em
+	\marginparwidth 0.17\paperwidth
+	\footskip 2.5\headheight
+	\end{Verbatim}
+	The first thing you should notice is that each length is defined entirely on the dimensions of the paper and the size of the text. This is important for compatibility across several page sizes.
+	
+	The dimensions chosen here generally follow the recommendations set out by typographers. Read the discussion \href{http://tex.stackexchange.com/questions/71172/why-are-default-latex-margins-so-big}{here}. The author of the most up-voted answer mentions the \texttt{tufte} class, which was clearly created with much thought on typography. This class was intended for writing books, and I think the margin size therein is too large to be reasonable for this preamble, where the primary use is for writing homework assignments. However, you will find that when the paper size is \texttt{letterpaper} (standard in the U.S.) and the text size is \texttt{11pt} or \texttt{12pt}, then the text width falls within the recommended 60-75 characters per line, and if the text size is \texttt{10pt}, then you will see roughly 75-85 characters per line. I feel that this definition is a nice compromise between the typographical guidelines and the (relatively new) desire for roughly 1 inch margins.
+	
+	\subsection{Footnote symbols} \label{footnotes}
+	Since mathematics homework is the intended primary use of this preamble, it is important that the symbols inserted for footnotes will not be confused with mathematical expressions. Enumerating the footnotes with Arabic numerals (1, 2, 3, etc) can look like exponents, so we need to use symbols. However, the default footnote symbols start with an asterisk. This is a problem, because oftentimes an asterisk is used to denote a ``special'' mathematical object, so a new list of symbols need to be defined.
+	
+	I decided to use the following symbols: $\dag \quad \ddag \quad \kreuz \quad \star$. These symbols should avoid nearly all confusion associated with mathematical expressions, and, using the \texttt{alphalph} package, these symbols will be multiplied if more footnotes are created than available symbols.
+	
+	I did not include this feature in the \texttt{QUIZ} edition, since I do not imagine ever needing footnotes on a quiz.
+	
+	\subsection{Theorem styles} \label{thmstyles}
+	As mentioned above, the \texttt{amsthm} package allows us to create our own theorem-like environments. The predefined environments in this preamble are:
+	\begin{itemize}
+	\item Theorem, using \verb|\begin{thm}|
+	\item Proposition, using \verb|\begin{prop}|
+	\item Lemma, using \verb|\begin{lem}|
+	\item Corollary, using \verb|\begin{cor}|
+	\item Numbered versions of everything above, using \verb|\begin{nthm}|, etc.
+	\item Definition, using \verb|\begin{defn}|
+	\item Example, using \verb|\begin{exmp}|
+	\item Solution, using \verb|\begin{sol}|
+	\item Case, using \verb|\begin{case}|
+	\item Note, using \verb|\begin{note}|
+	\item Claim, using \verb|\begin{claim}|
+	\end{itemize}
+	
+	\subsection{Framed definitions/theorems}
+	By default, definitions and theorem/proposition/lemma/corollary 
+	environments will typeset without any special ornamentation. If you would 
+	like definitions or theorems/propositions/lemmas/corollaries to be typeset 
+	with a frame around them, simply type \verb|\frameddefinitions|, 
+	\verb|\framedtheorems|, or \verb|\framedntheorems| in your preamble.
+	
+	\subsection{The header}
+	You can populate the header by using the following three commands: 
+	\verb|\coursetitle{}|, \verb|\hwtitle{}|, and \verb|\myname{}|. I recommend 
+	editing this preamble directly by inserting your name as I have done so 
+	that you can save yourself from setting your name for every new document.
+
+\section{Features in the \texttt{QUIZ} edition}
+
+	\subsection{Page layout}
+		The layout of each page is defined as such:
+		\begin{Verbatim}[frame=single,gobble=2,fontsize=\small]
+		\hoffset -0.03\paperwidth
+		\voffset -0.04\paperheight
+		\oddsidemargin 0pt
+		\topmargin 0pt
+		\headheight 1.3em
+		\headsep 1.3em
+		\textheight 0.78\paperheight
+		\textwidth 0.82\paperwidth
+		\marginparsep 1.5em
+		\marginparwidth 0.17\paperwidth
+		\footskip 2.5\headheight
+		\end{Verbatim}
+		The first thing you should notice is that each length is defined 
+		entirely on the dimensions of the paper and the size of the text. This 
+		is important for compatibility across several page sizes.
+		
+		The dimensions chosen here do not follow the same guidelines as for the
+		\texttt{HOMEWORK} edition, and this is strictly for aesthetic reasons.
+		Here, we achieve a symmetric look with approximately 1 inch margins.
+	
+	\subsection{The header}
+		You can populate the header by using the following two commands: 
+		\verb|\coursetitle{}| and \verb|\quiztitle{}|.
+		
+    \subsection{Points}
+        You can insert '\texttt{(n points)}' by using the command 
+        \verb|\points{n}|.
+	
+\newpage
+\appendix
+
+\section{Output from \textbackslash\texttt{layout}} \label{layout}
+\layout
+
+\section{Some \LaTeX\ references}
+Here is a list of references that I have found useful:
+
+\begin{itemize}
+\item The comprehensive symbol list: \href{http://mirror.utexas.edu/ctan/info/symbols/comprehensive/symbols-a4.pdf}{click here}
+
+\item The \LaTeX\ font catalog: \href{http://www.tug.dk/FontCatalogue/}{click here}
+
+\item The Comprehensive \TeX\ Archive Network: 
+\href{https://www.ctan.org/}{click here}
+
+\item Debugging your code:
+\href{http://www.eng.fsu.edu/~dommelen/l2h/errors.html}{click here}
+
+\item The \TeX -\LaTeX\ stack exchange: \href{http://tex.stackexchange.com/}{click here}
+
+\item Handwritten symbol recognizing tool: \href{http://detexify.kirelabs.org/classify.html}{click here}
+
+\item \texttt{tikz} and \texttt{PGFPlots} examples: \href{http://www.texample.net/tikz/examples/}{click here}
+
+\item \texttt{PGFPlots} gallery: 
+\href{http://pgfplots.sourceforge.net/gallery.html}{click here}
+
+\item Anything else:
+\href{http://texcatalogue.ctan.org/bytopic.html}{click here}
+
+
+\end{itemize}
+
+\end{document}

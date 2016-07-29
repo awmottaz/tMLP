@@ -1,0 +1,232 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CHANGE LOG/RELEASE NOTES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NEWEST CHANGES FOR THE HOMEWORK EDITION:
+(* indicates a big/important change)
+
+--------
+2.02    |
+--------------------------------------------------------------------------------
+    1. Added the 'Soc' operator (\soc) for the socle of a module.
+    2. Changed '\mpar{}' definition to include \raggedright formatting.
+    3. Added the 'Res' operator (\res) for the residue of a function.
+--------------------------------------------------------------------------------
+
+OLD CHANGE LOGS FOR THE HOMEWORK EDITION:
+(* indicates a big/important change)
+
+--------
+2.01    |
+--------------------------------------------------------------------------------
+    1. Redefined '\mid' to autoscale to the same size as the delimiters
+        surrounding it.
+    2. Added the operator '\Frac' for the field of fractions.
+    3. Added operators '\ann', '\tor', '\End', and '\bigboxplus'.
+   *4. Redefined the delimiters using the '\DeclarePairedDelimiter{}' command
+        from the 'mathtools' package, and switched definitions of starred
+        versions so that non-starred versions auto-scale, and starred versions
+        do not.
+    5. Added command '\divides', which places a vertical bar with nice spacing
+        into math environments. This bar is slightly longer than the height
+        of normal ordinals, so that
+            \abs{A} \divides \abs{B}
+        looks nice. There is also a new negated version: '\ndivides'.
+    6. Added the 'tikz-cd' package for creating commutative diagrams.
+    7. Added the tikz library 'arrows'.
+   *8. This project is now using the LPPL license. See the README.
+    9. Page dimensions have been redefined, via the geometry package.
+   10. Removed the `imakeidx` package. This feature is now found in the new
+        'NOTES' preamble.
+   11. Removed the `fancyvrb` package. This feature is now found in the new
+        'NOTES' preamble.
+   12. Moved the definition of 'bar' to the 'Functions' section.
+   13. Added '\bigboxplus', which behaves like '\bigoplus'.
+  *14. This preamble is now under the filename 'homework_preamble.tex'
+   15. Changed all '\def' occurances to '\newcommand' or '\renewcommand'.
+   16. Added the 'Hom' operator.
+   17. Added a couple of necessary lines that are used when creating the format
+        file.
+--------------------------------------------------------------------------------
+
+--------
+2.0    |
+--------------------------------------------------------------------------------
+   *1. The preamble.tex file has been completely revamped and is now much more
+        readable.
+   *2. This README has also been completely revamped with the same aestetic
+        changes as the preamble.
+    3. Added the command '\mpar{@}' to serve as a replacement for
+        '\marginpar{@}'.
+    4. Updated '\signchart' to handle any input for the first argument.
+   *5. 'signchart' is now a package, and can be found on CTAN!
+    6. Added the auto-scaled delimiter '\brkt{@}' for square brackets [ ]
+    7. Now loads tikz library 'shapes'
+    8. Re-defined the '\circled{@}' command to use an ellipse rather than a
+        circle
+    9. Added the package 'microtype' for better looking output
+    10. Added the package 'multicol' for creating balanced multiple column
+        sections of the document.
+    11. Removed all of the alternative fonts. Keeping in mind that this will be
+        a class someday, this feature is rather silly.
+    12. I changed the name of this collection from 'MOTTAZ UNIVERSAL LaTeX
+        PREAMBLE' to 'the MOTTAZ STANDARD LaTeX PREAMBLE'.
+    13. Added the package 'imakeidx' for inserting an index into the document.
+    14. Added command '\framedntheorems' to place frames around numbered
+        theorems
+    15. Redefined '\limsup' and '\liminf' so that they are actual operators.
+--------------------------------------------------------------------------------
+
+--------
+1.7    |
+--------------------------------------------------------------------------------
+    1. Fixed top & bottom spacing for the following environments: nthm, nlem,
+        nprop, ncor, thm, lem, prop, cor, defn, exmp, sol, case.
+   *2. There is another preamble! This one is for writing quizzes. Look for the
+        'quiz_preamble.tex' file.
+    3. Redefined '\Re' and '\Im' so that it prints 'Re' and 'Im' instead of the
+        fraktur font variant
+    4. Added math operator '\fun' for the set of all functions
+    5. Added the double stroke character '\H' for the Quaternions/Hamiltonions
+    6. Redefined the '\bar{@}' command to make it slightly wider and auto-scale
+        with the input.
+    7. Removed the '\cconj{@}' command. I believe this to be too specific when
+        '\bar{@}' is intuitive and does the job nicely.
+    8. Added '\cis' operator as shorthand for 'cos _ i sin'
+    9. Added '\Arg' operator for the Principal Argument of a complex number
+--------------------------------------------------------------------------------
+
+--------
+1.6    |
+--------------------------------------------------------------------------------
+   *1. Changed the '\signchart' command so that entering signs is MUCH simpler.
+        New syntax: '\signchart{1,2,3}{+,-,+,-}'
+    2. Added the 'xkeyval' package for creating key-value pairs for macros
+    3. Added key-value options to '\signchart' to change the width of the chart
+        or the height of the symbols, as well as the arrowheads.
+    4. Fixed bug in '\signchart' definition so that there is no limit to the
+        number of characters in a symbol.
+    5. Added command '\paren{@}' which places its contents inside of auto-scaled
+        parentheses.
+    6. Added the ceiling and floor functions using the commands '\ceil{@}' and
+        '\floor{@}'.
+    7. Changed the default font to 'Latin Modern'. This helps to avoid weird
+        typesetting issues.
+    8. Added the command '\cconj{@}' which places a bar over the argument.
+--------------------------------------------------------------------------------
+
+--------
+1.5    |
+--------------------------------------------------------------------------------
+    1. Switched from the 'enumerate' package to the 'enumitem' package.
+        'enumitem' offers much more customization options than 'enumerate'. The
+        'enumerate' package was loaded with the 'shortlabels' option, so TeX
+        documents written with previous versions of the preamble are not
+        affected.
+    2. Added the 'tabularx' package for customization options in tabular
+        environments.
+    3. Added the 'arydshln' package for inserting dashed lines in tabluar/array
+        environments.
+    4. Added a new theorem style 'Case' in the same style as 'Definition'.
+    5. Added the package 'array' for further customizations of tabular/array
+        environments. Specifically, we inserted the global commad
+        '\setlength{\extrarowheight}{1pt]' to fix the issue of capitol letters
+        touching the horizontal lines in a table/array.
+    6. Added the command '\set{@}' which places the contents inside of
+        automatically scaled curly braces.
+    7. Added the packages 'textgreek' and 'upgreek' for inserting upright greek
+        letters in text mode and math mode, respectively.
+    8. Added the option 'unicode' to the 'hyperref' package so that if greek
+        letters are used in a hyperlink, they will be nicely replaced with their
+        unicode analogs in the side panel/contents of the PDF viewer
+    9. Changed the definition of the doublestroke character '\C' using
+        '\renewcommand', since apparently one of these new packages defined that
+        command already.
+    10. Changed the header text to small caps shape.
+    11. Added the 'fancyvrb' package for customizaton of the verbatim
+        environments.
+    12. Added the option 'align = margin' to itemize environments to place item
+        labels in the left margin.
+   *13. Created a usage guide which explains LITERALLY EVERYTHING there is to
+        know about this preamble. If you think there is anything it does not
+        cover, let me know ASAP.
+    14. Added commands '\frameddefinitions' and '\framedtheorems'. When put in
+        the preamble of your document, 'definition' and
+        'theorem/lemma/proposition/corollary' environments will be placed
+        inside of a frame.
+--------------------------------------------------------------------------------
+
+--------
+1.4    |
+--------------------------------------------------------------------------------
+    1. Added commands '\coursetitle{@}', '\hwtitle{@}', and '\myname{@}' to
+        populate the header
+    2. Changed PGFPlots compatability to version 1.10. After some research, I
+        found that leaving the 'compat' variable as 'newest' is not the best
+        idea.
+    3. Added PGFPlots library 'fillbetween' which allows the user to name plots
+        and add a fill color in between two plots
+    4. Added option 'dvipsnames' to 'xcolor' package to allow for the use of the
+        68 standard colors in dvips
+    5. Needed to load the 'xcolor' package before the 'pgfplots' package to
+        avoid option clash (since 'pgfplots' also loads 'xcolor')
+    6. Added the package 'float' for the placement character 'H', which places 
+        the figure "here no matter what"
+   *7. Redefined page layout dimensions in terms of paper size and text size, so
+        that the user will see a nice layout no matter which page size/text size
+        they choose. The layout has been optimized to conform with standard
+        typography guidelines. For 'letterpaper' size and 11pt or 12pt font, the
+        text spans within the recommended range of 60-75 characters per line,
+        and at 10pt font the user will see around 75-85 characters per line,
+        which is only slightly outside of this recommended range. As part of
+        this adjustment, the margin size was expanded for the added benefit of a
+        more "useful" margin. That is, longer margin notes are readable and no
+        longer appear with one or two words per line. Inspiration for this
+        change came from the discussion on this thread:
+      tex.stackexchange.com/questions/71172/why-are-default-latex-margins-so-big
+    8. Added numbered versions of theorem, lemma, proposition, and corollary
+        environments
+--------------------------------------------------------------------------------
+
+--------
+1.3    |
+--------------------------------------------------------------------------------
+    1. Added command '\darktheme' to invert colors on output PDF. This is to
+        reduce eye strain while creating/editing TeX documents.
+    2. Added command '\circled{@}' which places a circle around the argument in
+        inline text.
+    3. Added the 'IMPORTANT NOTES' section to the README file.
+    4. Added command '\signchart{<numbers>}{<string array>}' which generates a
+        sign chart
+    5. Created a working example of this new feature
+--------------------------------------------------------------------------------
+
+--------
+1.2    |
+--------------------------------------------------------------------------------
+    1. Added more footnote symbols, adjusted code for improved readability
+    2. Avoided potential footnote counter error by having symbols multiply when
+        needed
+    3. 'pdfpages', 'cleveref', 'wasysym', 'needspace', 'lipsum', and 'alphalph'
+        packages added
+    4. Redefined the proof environment so that if only 3 lines or fewer fit on a
+        page, the entire proof will begin on a new page
+    5. Small adjustments to theoremstyle definitions
+    6. Added commands for choosing alternative fonts.
+    7. Improvement of readability
+--------------------------------------------------------------------------------
+
+--------
+1.1    |
+--------------------------------------------------------------------------------
+   *1. Created this README file
+    2. Redefined '\headheight' to account for different font size selections
+    3. Changed '\pgfplotsset{compat=1.9}' to '\pgfplotsset{compat=newest}' for
+        simplified backwards compatibility in the future
+    4. Expanded list of symbols/math operators
+    5. Removed '\myfrac'. This was temporarily defined for a specific use, and
+        was not intended for the universal preamble.
+    6. A comprehensive description of how to define a fraction-like object was
+        added in case this is desired in the future.
+    7. 'Goals for the future' was transferred to this README file. I believe
+        this is a more appropriate location for this list.
+--------------------------------------------------------------------------------

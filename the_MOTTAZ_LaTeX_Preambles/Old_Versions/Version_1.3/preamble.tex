@@ -1,0 +1,375 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% THE MOTTAZ PREAMBLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Created by: Tony Mottaz
+%% Description: This is my customized preamble with which I write all of my homework 
+%% assignments.
+%% It is ever-expanding to fit new and nitpicky uses.
+%% Please refer to the README for change log, goals for the future, and other info.
+
+%% Version: 1.3
+%% Publish Date: November 23, 2015
+%% Publish Location: Tony's Copy.com cloud storage account
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SET THE LAYOUT OF THE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE: This layout assumes that the user is using the letterpaper size.
+% Specify this by inserting the keyval option 'letterpaper', e.g.
+% '\documentclass[letterpaper]{article}'
+% at the beginning of your .tex document.
+
+\usepackage{layout}
+\hoffset 0.25in
+\voffset 0pt
+\oddsidemargin 0pt
+\topmargin 0pt
+\headheight 1.3em
+\headsep 25pt
+\textheight 600pt
+\textwidth 6in
+\marginparwidth 85pt
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CHOOSE AN ALTERNATIVE FONT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\concfont}{%		The classic font created by Donald Knuth
+\usepackage{concmath}
+\usepackage[T1]{fontenc}
+}
+
+\newcommand{\stixfont}{%		Similar to Times, good for textbook-style text
+\usepackage[T1]{fontenc}
+\usepackage{stix}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% For basic math typesetting needs
+\usepackage{mathtools,amsthm,amssymb}
+
+% For double stroke fonts (\mathds{•}) and math script fonts (\mathscr{•})
+\usepackage{dsfont,mathrsfs}
+
+% Math package to show cancellation
+\usepackage{cancel}
+
+% For custom enumerations (refer to documentation)
+\usepackage{enumerate}
+
+% Can change size of math (refer to documentation)
+\usepackage{relsize}
+
+% The Tikz package is utilized for creating mathematical images, and PGFPlots 
+% provides tools for creating graphs
+\usepackage{tikz,pgfplots}
+% This gives PGFPlots backwards compatibility
+\pgfplotsset{compat=newest}
+
+% To correct proof environment spacing (see below)
+\usepackage{needspace}
+
+% For todo notes in the margin, plus other features (refer to the documentation)
+\usepackage[textwidth=0.9\marginparwidth]{todonotes}
+
+% Creates the fancy header
+\usepackage{fancyhdr}
+
+% New paragraphs skip a line rather than indent
+\usepackage{parskip}
+
+% Creates hyperlinks
+\usepackage[colorlinks=true,linkcolor=blue,linkbordercolor=white]{hyperref}
+
+% Additional hyperlink possibilities
+\usepackage{cleveref}
+
+% Extended coloring options (refer to documentation)
+\usepackage{xcolor}
+
+% Framed environment puts a box around its contents (refer to documentation)
+\usepackage{framed}
+
+% For some miscellaneous symbols
+\usepackage{wasysym}
+
+% For adding dummy text
+\usepackage{lipsum}
+
+% Utilized in footnote symbols definition (see below)
+\usepackage{alphalph}
+
+% For inserting PDF documents
+\usepackage{pdfpages}
+
+
+% Used in definition of '\signchart'
+\usepackage{xstring}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% USER DEFINED FOOTNOTE SYMBOLS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NOTE: To add another symbol, add '\or\symbol' to the string below,
+% as demonstrated.
+
+\makeatletter
+\newcommand*{\myfnsymbolsingle}[1]{%
+  \ensuremath{%
+    \ifcase#1
+    \or
+      \dag 
+    \or
+      \ddag
+    \or
+      \kreuz
+    \or
+      \star
+    \else
+      \@ctrerr  
+    \fi
+  }%   
+}   
+\makeatother
+
+\newcommand*{\myfnsymbol}[1]{%
+  \myfnsymbolsingle{\value{#1}}%
+}
+
+% remove upper boundary counting error 
+% by multiplying the symbols, if needed
+
+\newalphalph{\myfnsymbolmult}[mult]{\myfnsymbolsingle}{}
+
+\renewcommand*{\thefootnote}{%
+  \myfnsymbolmult{\value{footnote}}%
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% USER DEFINED COMMANDS & MATH OPERATORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Shortcuts for double stroke characters
+\newcommand{\N}{\mathds{N}}
+\newcommand{\Z}{\mathds{Z}}
+\newcommand{\Q}{\mathds{Q}}
+\newcommand{\R}{\mathds{R}}
+\newcommand{\C}{\mathds{C}}
+\newcommand{\F}{\mathds{F}}
+
+%% Various mathematical delimeters and reassignment of operators %%
+
+% Places the argument inside auto-scaled angular brackets
+\newcommand{\ang}[1]{\left\langle #1 \right\rangle}
+
+% Places the argument inside auto-scaled vertical bars
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+
+% Places the argument inside auto-scaled double vertical bars
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+
+\newcommand{\iso}{\cong}	% The 'is isomorphic to' symbol
+\newcommand{\nsg}{\unlhd}	% The 'normal subgroup' symbol
+\newcommand{\rnsg}{\unrhd}	% Reversed 'normal subgroup' symbol
+\newcommand{\nnsg}{\ntrianglelefteq}	% Negated 'normal subgroup' symbol
+\newcommand{\del}{\nabla} 	% The 'del', or 'gradient' operator
+\newcommand{\dsum}{\displaystyle\sum\limits}	% Like \dfrac, but for inline sums
+\renewcommand{\limsup}{\overline{\lim}\,}	% The 'limit superior' symbol
+\renewcommand{\liminf}{\underline{\lim}\,}	% The 'limit inferior' symbol
+
+% Upper integral
+\def\upint{\mathchoice
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+  \int}
+% Lower integral
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+\newcommand{\eref}[1]{(\ref{#1})}
+
+% User defined fraction-like objects.
+% The genfrac command takes 6 arguments.
+% The first two arguments are optional left and right delimiters, respectively
+% The third argument is an optional specification of the line thickness
+% The fourth argument optionally overrides the mathstyle sizing:
+% 0--displaystyle, 1--textstyle, 2--scriptstyle, 3--scriptscriptstyle
+% The last two arguments are the numerator and denominator, respectively.
+% For example, a binomial coefficient would be written in this environment:
+% \newcommand{\binom}[2]{\genfrac{(}{)}{0pt}{}{#1}{#2}}
+
+% User defined math operators
+\DeclareMathOperator{\ord}{ord}		% Order
+\DeclareMathOperator{\sgn}{sgn}		% Sign function
+\DeclareMathOperator{\lcm}{lcm}		% Least common multiple
+\DeclareMathOperator{\aut}{Aut}		% Group of automorphisms
+\DeclareMathOperator{\inn}{Inn}		% Group of inner automorphisms
+\DeclareMathOperator{\sym}{Sym}		% Symmetric group
+\DeclareMathOperator{\id}{id}		% Identity operator
+\DeclareMathOperator{\img}{Im}		% Image of a function
+\DeclareMathOperator{\stab}{Stab}	% Stabilizer
+\DeclareMathOperator{\orb}{Orb}		% Orbit
+\DeclareMathOperator{\cl}{C\ell}	% Conjugacy class
+\DeclareMathOperator{\core}{core}	% Core
+\DeclareMathOperator{\syl}{Syl}		% Sylow group
+\DeclareMathOperator{\cha}{char}	% Characteristic
+\DeclareMathOperator{\tr}{tr}		% Trace of a matrix
+
+% I want math inside of the \textbf{•} command to also be bold
+\DeclareTextFontCommand{\textbf}{\boldmath\bfseries}
+
+% For referencing multiple items to single footnote,
+% use 'text\footnote{\label{foo}Some text here}', and
+% later: 'other text\cref{foo}'
+\crefformat{footnote}{#2\footnotemark[#1]#3}
+
+% The following command inverts the colors of the PDF output.
+% This is nice while editing to lower eye strain.
+% Note: This command requires the xcolor package.
+\newcommand{\darktheme}{
+\pagecolor[rgb]{0.1,0.1,0.1}
+\color[rgb]{0.95,0.95,0.95}
+}
+
+% This command allows inline numbers to be placed inside a circle.
+% Note: This command requires the tikz package.
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+    
+% This command autmatically generates a signchart.
+% Syntax: \signchart{<list of values>}{<array of symbols inside of double quotes>}
+% Example: \signchart{1,2,3}{{"$+$","$-$","$+$","$-$"}}
+% Note the double braces in the second argument
+\newcommand{\signchart}[2]{
+\begin{center}
+\begin{tikzpicture}
+
+\def\yval{0.3}	% In the future, this will be a keyval option
+\pgfmathparse{\yval}
+\let\y\pgfmathresult
+\def\pwidth{5}	% In the future, this will be a keyval option
+\pgfmathparse{\pwidth}
+\let\wid\pgfmathresult
+
+\def\signs{#2}	% Read in the string array of signs
+\def\mylist{#1}	% Read in the values of the sign chart
+\def\other{{\mylist}}
+\StrCount{\mylist}{,}[\len]
+
+
+\draw[<->,thick] (0,0) -- (\wid,0);
+
+\foreach \i in {0,...,\len} {
+	\pgfmathparse{\other[\i]}
+	\let\x\pgfmathresult
+	\pgfmathparse{(\wid/(\len+2))*(\i+1)}
+	\let\j\pgfmathresult
+	\pgfmathparse{(\wid/(\len+2))*(\i+0.5)}
+	\let\k\pgfmathresult
+	\pgfmathparse{\signs[\i]}
+	\let\s\pgfmathresult
+	
+	\draw (\j,-0.15) -- (\j,0.15) node[anchor=south] {\x};
+	\node at (\k,\y) {\s};
+	}
+
+\pgfmathparse{(\wid/(\len+2))*(\len+1.5)}
+\let\k\pgfmathresult
+\pgfmathparse{\signs[\len+1]}
+\let\s\pgfmathresult
+\node at (\k,\y) {\s};
+
+\end{tikzpicture}
+\end{center}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% THEOREM STYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% REFER TO the amsthm documentation for further explanation.
+
+% First define the styles.
+\newtheoremstyle{first_style} 		% name
+    {\topsep}                    	% Space above
+    {\topsep}                    	% Space below
+    {\slshape}                		% Body font
+    {}                           	% Indent amount
+    {\bfseries}                  	% Theorem head font
+    {.}              				% Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
+    {}  						  	% Theorem head spec (can be left empty, meaning *normal*)
+    
+\newtheoremstyle{second_style} 		% name
+    {0.5ex}                    		% Space above
+    {\topsep}                    	% Space below
+    {\normalfont}                	% Body font
+    {}                           	% Indent amount
+    {\bfseries}                  	% Theorem head font
+    {:}              				% Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
+    {}  						  	% Theorem head spec (can be left empty, meaning *normal*)
+    
+\newtheoremstyle{third_style} 		% name
+    {1ex}	                    	% Space above
+    {-0.5\baselineskip}   	            % Space below
+    {\normalfont}                	% Body font
+    {}                           	% Indent amount
+    {\slshape \bfseries}            % Theorem head font
+    {$\,\rightarrow \,$}           	% Punctuation after theorem head
+    {0pt}                       	% Space after theorem head
+    {}  						 	% Theorem head spec (can be left empty, meaning *normal*)
+    
+% Now define the theorem environments based on these styles.
+\theoremstyle{first_style}
+\newtheorem*{thm}{Theorem}
+\newtheorem*{lem}{Lemma}
+\newtheorem*{prop}{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{second_style}
+\newtheorem*{defn}{Definition}
+\newtheorem*{exmp}{Example}
+\newtheorem*{sol}{Solution}
+
+\theoremstyle{third_style}
+\newtheorem*{note}{Note}
+\newtheorem*{claim}{Claim}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PROOF ENVIRONMENT SPACING %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% I prefer a proof to start on a new page if 3 lines or fewer of the proof will
+% only be seen on a single page. The 'needspace' package does this for me
+% quite nicely.
+
+% First, copy '\proof' and '\endproof' to avoid infinite loop errors:
+\expandafter\let\expandafter\oldproof\csname\string\proof\endcsname
+\let\oldendproof\endproof
+
+% Now we can redefine the proof environment:
+\renewenvironment{proof}[1][\proofname]{%
+	\needspace{4\baselineskip} \oldproof[#1]}
+	{\oldendproof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DEFINE HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lhead{<Course Title>}
+\chead{<Assignment Title>}
+\rhead{Tony Mottaz}		% Replace with your name
+\pagestyle{fancy}

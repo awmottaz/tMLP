@@ -1,0 +1,434 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% THE MOTTAZ QUIZ LATEX PREAMBLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Created by: Tony Mottaz
+%% Description: This is the first spinoff of the Mottaz Universal
+%% LaTeX Preamble. This preamble is designed and optimized for creating
+%% quizzes.
+
+%% Version: 1.0
+%% Publish Date: January 26, 2015
+%% Publish Location: Tony's Copy.com cloud storage account
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SET THE LAYOUT OF THE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The 'layout' package gives the command '\layout' which, when used in the
+%	beginning of your document, gives a summary of the various layout
+%	measurements.
+\usepackage{layout}
+
+% We now customize the layout measurements. These are designed to work for any
+%	paper size, e.g. a4paper, letterpaper, legalpaper, etc.
+%	All dimensions are calculated based only on the size of the page and the
+%	size of the font. Refer to the Usage Guide for the motivation behind this
+%	definition.
+
+\hoffset -0.03\paperwidth
+\voffset -0.04\paperheight
+\oddsidemargin 0pt
+\topmargin 0pt
+\headheight 1.3em
+\headsep 1.3em
+\textheight 0.78\paperheight
+\textwidth 0.82\paperwidth
+\marginparsep 1.5em
+\marginparwidth 0.17\paperwidth
+\footskip 2.5\headheight
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% CHOOSE AN ALTERNATIVE FONT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{lmodern}%			By default, we use the Latin Modern font
+\usepackage[T1]{fontenc}
+
+\newcommand{\concfont}{%		The classic font created by Donald Knuth
+\usepackage{concmath}
+\usepackage[T1]{fontenc}
+}
+
+\newcommand{\stixfont}{%		Similar to Times, good for textbook-style text
+\usepackage[T1]{fontenc}
+\usepackage{stix}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% For basic math typesetting needs
+\usepackage{mathtools,amsthm,amssymb}
+
+% For double stroke fonts (\mathds{•}) and math script fonts (\mathscr{•})
+\usepackage{dsfont,mathrsfs}
+
+% Math package to show cancellation
+\usepackage{cancel}
+
+% For custom enumerations
+% The 'shortlabels' option allows for the use of 'enumerate'-like definitions
+%	of the labels.
+\usepackage[shortlabels]{enumitem}
+
+% For additional customization of tabular and array environments.
+\usepackage{array}
+% The 'array' package allows us to cure the problem of capitol letters
+%	touching the '\hline's in a tabular environment.
+\setlength{\extrarowheight}{1pt}
+
+% This package allows the user to insert dashed lines in a tabular/array
+%	environments.
+% For vertical lines, use the ':' character in lieu of '|' as a column
+%	separator.
+% For horizontal lines, use the commands '\hdashline' and '\cdashline' in
+%	place of '\hline' and 'cline'.
+\usepackage{arydshln}
+
+% Can change size of math
+\usepackage{relsize}
+
+% Extended coloring options
+\usepackage[dvipsnames]{xcolor}
+
+% The Tikz package is utilized for creating mathematical images, and PGFPlots 
+% provides tools for creating graphs
+\usepackage{tikz,pgfplots}
+% This gives PGFPlots backwards compatibility
+\pgfplotsset{compat = 1.10}
+% This allows the user to use the PGFPlots feature 'fillbetween'
+\usepgfplotslibrary{fillbetween}
+
+% To correct proof environment spacing (see below)
+\usepackage{needspace}
+
+% For inserting todo notes and placeholders for missing figures.
+\usepackage[textwidth=0.9\marginparwidth]{todonotes}
+
+% Creates the fancy header
+\usepackage{fancyhdr}
+
+% New paragraphs skip a line rather than indent
+\usepackage{parskip}
+
+% Creates hyperlinks to section headings and labelled items.
+\usepackage[
+	colorlinks=true,
+	linkcolor=blue,
+	linkbordercolor=white,
+	urlcolor=blue,
+	unicode
+	]{hyperref}
+
+% Additional hyperlink possibilities
+\usepackage{cleveref}
+
+% Framed environment puts a box around its contents
+\usepackage{framed}
+
+% For some miscellaneous symbols
+\usepackage{wasysym}
+
+% For adding dummy text
+\usepackage{lipsum}
+
+% Utilized in footnote symbols definition (see below)
+\usepackage{alphalph}
+
+% For inserting PDF documents
+\usepackage{pdfpages}
+
+
+% Used in definition of '\signchart'
+\usepackage{xstring}
+
+% Extra control over figures. Use the 'H' placement character to mean
+%	"here, no matter what"
+\usepackage{float}
+
+% For customizing tabular environments.
+\usepackage{tabularx}
+
+% These two packages allow for writing upright greek letters in text mode and
+%	math mode, respectively, using commands such as '\textalpha',
+%	'\textAlpha', '\upalpha', and '\Upalpha'.
+\usepackage{textgreek,upgreek}
+
+% For fancy customized verbatim environments
+\usepackage{fancyvrb}
+
+% For creating key-value pairs, used in the definition of '\signchart'
+\usepackage{xkeyval}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% USER DEFINED COMMANDS & MATH OPERATORS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Shortcuts for double stroke characters
+% Note: One of the packages defines a command '\C'. I don't know which one
+%	does it, nor do I know what the command does. So I am just ignoring it and
+%	redefining it for my needs.
+\newcommand{\N}{\mathds{N}}		% Naturals
+\newcommand{\Z}{\mathds{Z}}		% Integers
+\newcommand{\Q}{\mathds{Q}}		% Rationals
+\newcommand{\R}{\mathds{R}}		% Reals
+\renewcommand{\C}{\mathds{C}}	% Complex numbers
+\renewcommand{\H}{\mathds{H}}	% Quaternions (Hamiltonions)
+\newcommand{\F}{\mathds{F}}		% Generic field
+
+%%%%% Various mathematical delimeters and reassignment of operators %%%%%%%%%%
+
+% Places the argument inside auto-scaled parentheses
+\newcommand{\paren}[1]{\left( #1 \right)}
+
+% Places the argument inside auto-scaled angular brackets
+\newcommand{\ang}[1]{\left\langle #1 \right\rangle}
+
+% Places the argument inside auto-scaled braces
+\newcommand{\brc}[1]{\left\{ #1 \right\}}
+
+% Places the argument inside auto-scaled vertical bars
+\newcommand{\abs}[1]{\left\vert #1 \right\vert}
+
+% Places the argument inside auto-scaled double vertical bars
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+
+
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}		% Ceiling function
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}	% Floor function
+
+
+\newcommand{\iso}{\cong}	% The 'is isomorphic to' symbol
+\newcommand{\nsg}{\unlhd}	% The 'normal subgroup' symbol
+\newcommand{\rnsg}{\unrhd}	% Reversed 'normal subgroup' symbol
+\newcommand{\nnsg}{\ntrianglelefteq}	% Negated 'normal subgroup' symbol
+\newcommand{\del}{\nabla} 	% The 'del', or 'gradient' operator
+\newcommand{\dsum}{\displaystyle\sum\limits}	% Like \dfrac, but for inline
+%	sums
+\renewcommand{\limsup}{\overline{\lim}\,}	% The 'limit superior' symbol
+\renewcommand{\liminf}{\underline{\lim}\,}	% The 'limit inferior' symbol
+
+% Upper integral
+\def\upint{\mathchoice
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}
+  \int}
+% Lower integral
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+
+% I redefine the bar command in order to
+%	1. make it slightly wider, and
+%	2. auto-scale over larger inputs.
+\renewcommand{\bar}[1]{
+\mkern 2mu\overline{\mkern-2mu#1\mkern-2mu}\mkern 2mu}
+
+%%%%% User defined fraction-like objects: %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The genfrac command takes 6 arguments.
+% The first two arguments are optional left and right delimiters, respectively
+% The third argument is an optional specification of the line thickness
+% The fourth argument optionally overrides the mathstyle sizing.
+% Use the following keys:
+% 0--displaystyle, 1--textstyle, 2--scriptstyle, 3--scriptscriptstyle
+% The fifth and sixth arguments are the numerator and denominator,
+%	respectively.
+% For example, a binomial coefficient would be created with this definition:
+% \newcommand{\binom}[2]{\genfrac{(}{)}{0pt}{}{#1}{#2}}
+
+%%%%% Math Operators %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define some math operators
+\DeclareMathOperator{\ord}{ord}		% Order
+\DeclareMathOperator{\sgn}{sgn}		% Sign function
+\DeclareMathOperator{\lcm}{lcm}		% Least common multiple
+\DeclareMathOperator{\aut}{Aut}		% Group of automorphisms
+\DeclareMathOperator{\inn}{Inn}		% Group of inner automorphisms
+\DeclareMathOperator{\sym}{Sym}		% Symmetric group
+\DeclareMathOperator{\id}{id}		% Identity operator
+\DeclareMathOperator{\img}{Im}		% Image of a function
+\DeclareMathOperator{\stab}{Stab}	% Stabilizer
+\DeclareMathOperator{\orb}{Orb}		% Orbit
+\DeclareMathOperator{\cl}{C\ell}	% Conjugacy class
+\DeclareMathOperator{\core}{core}	% Core
+\DeclareMathOperator{\syl}{Syl}		% Sylow group
+\DeclareMathOperator{\cha}{char}	% Characteristic
+\DeclareMathOperator{\tr}{tr}		% Trace of a matrix
+\DeclareMathOperator{\fun}{Fun}		% Set of functions
+\DeclareMathOperator{\cis}{cis}		% Cos + i Sin
+\DeclareMathOperator{\Arg}{Arg}		% Principal argument
+
+% Redefine \Re and \Im to give 'Re' and 'Im', respectively, in place of the
+%	standard fraktur font versions
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+
+
+%%%%% Other Math-related Commands %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% I want math inside of the \textbf{•} command to also be bold
+\DeclareTextFontCommand{\textbf}{\boldmath\bfseries}
+
+% This command autmatically generates a sign chart.
+% Syntax: \signchart{<list of values>}{<list of signs>}
+% Example: \signchart{1,2,3}{+,-,+,-}
+% Options: 'width' and 'height' change the width of the chart
+%	and the height of the symbols, respectively.
+
+\makeatletter
+\define@key{signchart}{height}[0.3]{\def\signHeight{#1}}
+\define@key{signchart}{width}[5]{\def\signChartWidth{#1}}
+\define@key{signchart}{arrows}[<->]{\def\theArrow{#1}}
+\makeatother
+
+\newcommand{\signchart}[3][]{
+\setkeys{signchart}{height, width, arrows, #1}
+\begin{center}
+\begin{tikzpicture}
+
+% Define the distance signs are from number line
+\pgfmathsetmacro{\snht}{\signHeight}
+
+% Define the total width of the sign chart
+\pgfmathsetmacro{\wid}{\signChartWidth}
+
+\def\nums{#2}	% Read in the values of the sign chart
+\def\signs{#3}	% Read in the string array of signs
+\def\numsarray{{\nums}}
+
+% Determine number of values minus one
+\StrCount{\nums}{,}[\len]
+
+\draw[\theArrow,thick] (0,0) -- (\wid,0);
+
+\foreach \i in {0,...,\len} {
+	
+	% Extract current number
+	\pgfmathparse{\numsarray[\i]}
+	\let\thisnum\pgfmathresult
+	
+	% Extract current sign
+	\pgfmathtruncatemacro{\j}{\i + 1}
+	\StrBehind[\j]{\signs}{,}[\stepOne]
+	\StrLen{\stepOne}[\aLength]
+	\pgfmathtruncatemacro{\cutAmount}{\aLength + 1}
+	\StrGobbleRight{\signs}{\cutAmount}[\almost]
+	\StrBehind[\j]{,\almost}{,}[\s]
+	
+	% Calculate horizontal positions of number and sign
+	\pgfmathsetmacro{\numpos}{(\wid/(\len+2))*(\i+1)}
+	\pgfmathsetmacro{\signcoord}{(\wid/(\len+2))*(\i+0.5)}
+	
+	% Draw a tick mark with the number above it.
+	\draw (\numpos,-0.15) -- (\numpos,0.15) node[anchor=south] {\thisnum};
+	% Add the sign to the left of the tick mark.
+	\node at (\signcoord,\snht) {$\s$};
+	}
+
+% The sign to the right of the last tick mark is left out of the loop, so we
+% now calculate its horizontal position and add it to the sign chart.
+\pgfmathsetmacro{\signcoord}{(\wid/(\len+2))*(\len+1.5)}
+\pgfmathtruncatemacro{\j}{\len + 1}
+\StrBehind[\j]{\signs}{,}[\s]
+\node at (\signcoord,\snht) {$\s$};
+
+\end{tikzpicture}
+\end{center}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% THEOREM STYLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% REFER TO the amsthm documentation for further explanation.
+
+% First define the styles.
+\newtheoremstyle{second_style} 		% name
+    {\baselineskip}            		% Space above
+    {0.7\baselineskip}             	% Space below
+    {\normalfont}                	% Body font
+    {}                           	% Indent amount
+    {\bfseries}                  	% Theorem head font
+    {:}              				% Punctuation after theorem head
+    {.5em}                       	% Space after theorem head
+    {}  						  	% Theorem head spec   
+    
+% Now define the theorem environments based on these styles.
+\theoremstyle{second_style}
+	\newtheorem*{defn}{Definition}
+	\newtheorem*{exmp}{Example}
+	\newtheorem*{sol}{Solution}
+	\newtheorem*{case}{Case}
+
+% Note: I have chosen short names for these in order to save keystrokes.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DEFINE HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Use the commands '\coursetitle{•}' and '\quiztitle{•}' to set the course
+% title and quiz titles, respectively.
+
+\def\cn{<Course Title>}
+\def\qt{<Quiz Title>}
+
+\newcommand{\coursetitle}[1]{\def\cn{#1}}
+\newcommand{\quiztitle}[1]{\def\as{#1}}
+
+% Set the pagestyle to suppress page numbers.
+\pagestyle{empty}
+
+% Commands to populate the top of the page.
+\newcommand{\makeheader}{
+	\textbf{\cn} \hfill \textbf{Name:} \rule{3in}{1pt}
+	
+	\textbf{\as}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% OTHER FEATURES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% For referencing multiple items to single footnote,
+% 	use '\footnote{\label{foo}<text in the footnote>}',
+% 	and later use: '\cref{foo}'
+\crefformat{footnote}{#2\footnotemark[#1]#3}
+
+
+
+% The following command inverts the colors of the PDF output.
+% This is nice while editing to lower eye strain.
+% Note: This command requires the xcolor package.
+\newcommand{\darktheme}{
+\pagecolor[rgb]{0.1,0.1,0.1}
+\color[rgb]{0.95,0.95,0.95}
+}
+
+
+
+% This command allows inline numbers to be placed inside a circle.
+% Note: This command requires the tikz package.
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+
+
+ 
+% Use the option 'align=margin' to place item labels in the left margin.
+% Add the option 'labelsep=0pt' so that the content in the items is
+%	properly aligned.
+% Requires the 'enumitem' package.
+% Example: \begin{enumerate}[align=margin,labelsep=0pt]
+\SetLabelAlign{margin}{\llap{#1~~}}
+
+
+% This command allows the user to specify the number of points a particular
+% question is worth.
+\newcommand{\points}[1]{\texttt{(#1 points)}}

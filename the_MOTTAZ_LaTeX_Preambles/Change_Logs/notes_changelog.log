@@ -1,0 +1,28 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CHANGE LOG/RELEASE NOTES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NEWEST CHANGES FOR THE NOTES EDITION:
+(* indicates a big/important change)
+
+--------
+1.01   |
+--------------------------------------------------------------------------------
+    1. Added the 'Soc' operator (\soc) for the socle of a module.
+    2. Changed '\mpar{}' definition to include \raggedright formatting.
+    3. Added the 'Res' operator (\res) for the residue of a function.
+   *4. Now loading 'imakeidx' before 'mathtools'.
+        At one point, the 'mathtools' package was incompatible with 'expl3'.
+        This may still be the case. I believe that 'imakeidx' is also
+        incompatible. I emailed the maintainers of these packages, and the
+        short-term solution is to load 'imakeidx' before 'mathtools'. There are
+        plans for a better fix in the future.
+--------------------------------------------------------------------------------
+
+OLD CHANGE LOGS FOR THE HOMEWORK EDITION:
+(* indicates a big/important change)
+
+--------
+1.0    |
+--------------------------------------------------------------------------------
+    1. This preamble is brand new. Tell me what you think!
+--------------------------------------------------------------------------------

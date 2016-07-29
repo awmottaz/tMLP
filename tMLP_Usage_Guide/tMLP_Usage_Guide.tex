@@ -1,0 +1,598 @@
+\documentclass[letterpaper]{ltxdoc}
+\input{tMLP_preamble.tex}
+%
+% The document
+\begin{document}
+%\layout{}
+%% TITLE PAGE %%
+\thispagestyle{plain}
+\maketitle
+\begin{abstract}
+The following document gives a detailed overview of the collection of \LaTeX\ 
+documents that comprise the \textsc{Mottaz} preambles. At this time, 
+this collection includes the following documents:
+\begin{itemize}
+\item \texttt{HOMEWORK} edition (|homework_preamble.tex|)
+\item \texttt{QUIZ} edition (|quiz_preamble.tex|)
+\item \texttt{NOTES} edition (|notes_preamble.tex|)
+\end{itemize}
+Each document is essentially a standalone preamble. They each define a page 
+layout, load packages, and define useful commands that help create documents 
+for their intended end use.
+
+Along with the \texttt{.tex} files listed above are corresponding \texttt{.fmt} 
+files, compiled using the 
+\href{http://mirror.hmc.edu/ctan/macros/latex/contrib/mylatexformat/mylatexformat.pdf}
+{\texttt{mylatexformat}} tool. Look ahead in the \hyperref[sec:usepream]{Using 
+a Preamble} section.
+\end{abstract}
+\pdfbookmark[1]{\contentsname}{toc}
+\tableofcontents
+%% MOTIVATION
+\section{Motivation}
+The beginning of every \LaTeX\ document has a preamble. If you write lots of 
+documents in \LaTeX , chances are you have created your own dedicated 
+\texttt{preamble.tex} file which you load into every document. As a graduate 
+student in mathematics, I started making my own. As I discovered more and more 
+ways to customize my document and make handy macros, my preamble started to 
+grow. This preamble has become extremely useful for me, and I have put a lot of 
+thought and effort into creating a comprehensive collection of packages and 
+creation of macros which serve the purposes of math students and professors 
+well.
+
+These kinds of projects are not new. Well-meaning students and professors alike 
+have created their own preambles that they share with their friends. This 
+practice becomes devastating when the preambles become long and disorganized, 
+and then some error creeps in and they have no idea how to fix it. This project 
+stands out because I have been dedicated to careful documentation from the 
+beginning. Every change and iteration has been noted, old versions saved, and 
+each preamble is written with high levels of organization and readability in 
+mind.
+
+The \texttt{HOMEWORK} edition was the first that I created. It is designed to 
+provide any packages one might need to typeset all mathematics homework for any 
+mathematics course, and it defines many macros (i.e. commands) to speed up the 
+typesetting process. The \texttt{QUIZ} edition came next, and this provides a 
+nice layout and some other macros for simplifying the creation of quizzes in 
+mathematics courses. The \texttt{NOTES} edition was a shoot-off of the 
+\texttt{HOMEWORK} edition, and it is used to take course notes.
+
+If you have any suggestions for changes/additions, or if you have 
+problems/errors of any kind, please send me an email at:
+\begin{center}
+\texttt{anthonywmottaz@gmail.com}
+\end{center}
+%% FUTURE DEVELOPMENT GOALS
+\section{Future Development Goals}
+\begin{enumerate}[\bfseries I.]
+\item Repackage this collection of preambles into a classes.
+\begin{enumerate}[\bfseries i.]
+    \item Key-value options: \texttt{oneside} and \texttt{twoside} options; 
+    \texttt{microtype} on/off
+\end{enumerate}
+\item Other versions I would like to make:
+\begin{enumerate}[\bfseries i.]
+    \item Tests/exams
+    \item Solution guides
+\end{enumerate}
+\item Add a command like |\layout| to print a list of commands or a help guide 
+for this preamble.
+\end{enumerate}
+%% USING A PREAMBLE
+\section{Using a Preamble}
+\label{sec:usepream}
+The following subsections will explain how to use one of the \textsc{Mottaz} 
+preambles in your own \LaTeX\ document.
+%% LOADING A PREAMBLE
+\subsection{Loading a Preamble}
+Save the file (|<edition>_preamble.tex|) to your system, and make note of the 
+file path. For example, you might save this file to
+    \begin{verbatim}
+    C:Users/YourName/Documents/<edition>_preamble.tex      (Windows)
+    Users/yourname/Documents/<edition>_preamble.tex        (Macintosh)
+    /home/yourname/Documents/<edition>_preamble.tex        (Linux)
+    \end{verbatim}
+In the preamble of the document you are creating, simply use the command
+\begin{center}
+|\input|\marg{path}
+\end{center}
+where \meta{path} is the file path you noted above. The input command will read 
+the contents of |<edition>_preamble.tex| as if they were typed directly into 
+your document.
+
+Next, set the contents of the header\footnote{To see how this is done, look 
+ahead to the section corresponding the preamble you are using.}, if applicable. 
+Here is an example:
+
+\Needspace*{11\baselineskip}
+\begin{Verbatim}[fontsize=\small, frame=lines, framesep = 2ex,
+    label = Sample Document, numbers = left, commandchars=+()]
+\documentclass[letterpaper]{article}
+
+\input{/home/yourname/Documents/homework_preamble.tex}
+\coursetitle{Math Class}
+\hwtitle{Homework \#1}
+\myname{Joe Schmö}
+
+\begin{document}
+    +meta(Document content)
+\end{document}
+\end{Verbatim}
+%% PACKAGE LOADING ERRORS
+\subsection{Package Loading Errors}
+Each preamble loads many packages. It is imperative that you follow these 
+guidelines, else you might experience lots of errors when you compile your 
+first document.
+
+Firstly, there are some packages that may not be installed on your system. 
+Refer to the \texttt{README} for an up-to-date list of these. Note that the 
+\texttt{signchart} package, written by me, may need to be manually obtained 
+from the CTAN.
+
+Secondly, \emph{do not} change the order in which these packages are loaded by 
+the preamble. Some packages depend on other packages, and some packages load 
+other packages on their own. If there are specific options used by a certain 
+package, then this package needs to be loaded with those options before another 
+package loads it. All this is to say that if the packages are not loaded in the 
+correct order, you will get likely get an ``\texttt{option clash}'' error when 
+compiling your document, or some features may not work as expected.
+%% USING MYLATEXFORMAT
+\subsection{Using \texttt{mylatexformat}}
+Creating a format file is an extremely effective method for speeding up the 
+compilation time of your document. The following instructions assume you have 
+basic knowledge of how to run commands in a terminal. If you have never done 
+this, there are great
+\href{http://pcsupport.about.com/od/commandlinereference/f/open-command-prompt.htm}
+{guides} all
+\href{http://www.macworld.co.uk/feature/mac-software/get-more-out-of-os-x-terminal-3608274/}
+{over} the
+\href{http://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/}
+{web}.
+
+The preamble of any document consists of what we will call \emph{static} items 
+and \emph{dynamic} items. The static items are the packages you load, the 
+definitions you make --- things that rarely change for different documents. The 
+dynamic items consist of things like |\title{}| or |\author{}| which are 
+generally unique to the specific document in which you are working. We can 
+create a format based on the static items and use this format in any document 
+we wish. We are essentially ``precompiling'' the preamble to save time loading 
+packages and defining commands every single time you compile a document.
+
+Suppose you have a file called \texttt{mydoc.tex}, which may look something 
+like this:
+\Needspace*{18\baselineskip}
+\begin{Verbatim}[fontsize=\small, frame=lines, framesep = 2ex,
+    label = {mydoc.tex}, commandchars=+()]
+\documentclass[letterpaper]{article}
+
+% Static preamble items
+\usepackage{+meta(package)}
+...
+\newcommand{+meta(command)}{+meta(definition)}
+...
+
+% Dynamic preamble items
+\title{+meta(title)}
+\author{+meta(author)}
+...
+
+\begin{document}
+    +meta(Document content)
+\end{document}
+\end{Verbatim}
+We have to tell \texttt{mylatexformat} where our static content ends, since 
+that is the only part we wish to encapsulate into our format. We do this by 
+adding the line |\csname endofdump\endcsname|, like so:
+\Needspace*{19\baselineskip}
+\begin{Verbatim}[fontsize=\small, frame=lines, framesep = 2ex,
+    label = {mydoc.tex}, commandchars=+()]
+\documentclass[letterpaper]{article}
+
+% Static preamble items
+\usepackage{+meta(package)}
+...
+\newcommand{+meta(command)}{+meta(definition)}
+...
+
+\csname endofdump\endcsname
+% Dynamic preamble items
+\title{+meta(title)}
+\author{+meta(author)}
+...
+
+\begin{document}
+    +meta(Document content)
+\end{document}
+\end{Verbatim}
+Now we are ready to create a format. Open a terminal and navigate to the 
+directory containing \texttt{mydoc.tex}. Then run the following command:
+\begin{verbatim}
+pdftex -ini -jobname="myformat" "&pdflatex" mylatexformat.ltx mydoc.tex
+\end{verbatim}
+The job name \texttt{myformat} will be the name of your new format. You can 
+replace \texttt{\&pdflatex} with whichever program you will use to compile your 
+document, such as \texttt{\&latex}, \texttt{\&xetex}, etc. After running this 
+command, you will have a new file called \texttt{myformat.fmt}. Now, in your 
+original document you can delete all of the contents before the 
+\texttt{endofdump} line and replace them with a single line: |%&myformat|. Here 
+is what your new document will look like:
+\Needspace*{12\baselineskip}
+\begin{Verbatim}[fontsize=\small, frame=lines, framesep = 2ex,
+    label = {mydoc.tex}, commandchars=+()]
+%&myformat
+\csname endofdump\endcsname
+% Dynamic preamble items
+\title{+meta(title)}
+\author{+meta(author)}
+...
+
+\begin{document}
+    +meta(Document content)
+\end{document}
+\end{Verbatim}
+A couple of notes:
+\begin{enumerate}
+\item The first line with your format name \emph{does} begin with a comment 
+character, as shown.
+\item You will no longer have the |\documentclass[]{}| command at the 
+beginning. This is handled by your format.
+\item The \texttt{endofdump} command must still be included, otherwise the 
+dynamic preamble items will be skipped.
+\end{enumerate}
+This is all you need to start using formats. The next step is optional, but 
+quite useful. The format file needs to be in the same directory as the document 
+that is using it. If you wish to use the same format in several documents, 
+there is a special directory in which you can put your format file that is 
+searched automatically by the compiler, as long as you are using a standard TeX 
+Live installation.
+\begin{verbatim}
+                        .../texmf/web2c/pdftex/
+\end{verbatim}
+With \texttt{myformat.fmt} copied into the above directory, you can use this 
+format in any document.
+
+For your convenience, format files have been created for the \textsc{Mottaz} 
+preambles and are included in this distribution.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HOMEWORK EDITION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\texttt{HOMEWORK} Edition}
+This section describes the packages and macros associated with the file 
+|homework_preamble.tex|. This preamble is designed to be used when typing 
+mathematics homework solutions. To begin, let's start with a discussion about 
+page layout.
+%
+%% HOMEWORK EDITION LAYOUT
+\subsection{Page Layout}
+The dimensions chosen for the page layout generally follow the recommendations
+set out by typographers. Read the discussion
+\href{http://tex.stackexchange.com/questions/71172/why-are-default-latex-%
+margins-so-big}{here}. The author of the most up-voted answer mentions the
+\texttt{tufte} document class, which was carefully created with significant
+thought about proper typography practice. That class was intended for writing
+books, and I think the margin size defined therein is too large to be
+reasonable for writing mathematics homework assignments. However, I have
+adjusted the layout of the page to partially conform with the proper typography
+recommendations. For example, when using letter or A4 paper sizes, the text
+width very nearly agrees with the recommended 60-75 characters per line. I feel
+that this page layout is a nice compromise between the typographical guidelines
+and the (relatively new) desire for roughly 1 inch margins.
+
+Here is the page layout definition, using the 
+\hyperref[pkg:geometry]{\texttt{geometry}} package.
+\Needspace*{11\baselineskip}
+\begin{Verbatim}[frame = lines, framesep = 2ex, fontsize = \small,
+    label = Layout, numbers = left, firstnumber = 53]
+\geometry{
+    headheight = 1.3em,
+    headsep = 1.3em,
+    marginparsep = 1.5em,
+    footnotesep = 3em,
+    hdivide={0.15\paperwidth,0.62\paperwidth,*},
+    vdivide={0.1\paperheight,0.78\paperheight,*},
+    marginparwidth=0.18\paperwidth
+}
+\end{Verbatim}
+%
+%% THE PACKAGES
+\subsection{Packages}
+The following is a list of packages that are loaded into this preamble, along
+with a description of what the package does and perhaps an example of its usage.
+You may also click on each package to open the package documentation in your
+internet browser.
+%
+\subsubsection{Page Layout Packages}
+%
+\DescribePackage%
+{http://mirror.utexas.edu/ctan/macros/latex/required/tools/layout.pdf}%
+{layout}
+This package defines the command |\layout| which produces an overview of the
+layout of the current document. The output of |\layout| for the present 
+document can be found in Appendix \ref{apx:layout}.
+
+\DescribePackage%
+{http://mirrors.acm.jhu.edu/ctan/macros/latex/contrib/geometry/geometry.pdf}
+{geometry}
+This package provides a simple interface for defining and adjusting page 
+dimensions. This is used to define the page layout in each preamble.
+%
+\subsubsection{Font and Typing Packages}
+%
+\DescribePackage%
+{http://www.ctan.org/tex-archive/fonts/lm/}
+{lmodern}
+This package provides the Latin Modern font, an extension of the 
+\href{http://www.ctan.org/tex-archive/fonts/cm/}{Computer Modern font} with 
+extended glyph coverage and enhanced metrics.
+
+\DescribePackage%
+{http://www.ctan.org/pkg/fontenc}
+{fontenc}
+This package is a standard for changing the font encodings in the output PDF 
+document. It is loaded as usual with the \texttt{T1} option, specifying the use 
+of T1 encoding.
+
+\DescribePackage%
+{http://www.ctan.org/pkg/inputenc}
+{inputenc}
+This package, loaded with the \texttt{UTF-8} option, allows \LaTeX\ to read and 
+understand special characters from your source document. For example, if you 
+insert the character `ö' into your source document, it will give the expected 
+output in your PDF.
+
+\DescribePackage%
+{http://mirrors.acm.jhu.edu/ctan/macros/latex/contrib/enumitem/enumitem.pdf}
+{enumitem}
+This package gives the user complete control over the customization of 
+itemized/enumerated lists. This package is loaded with the \texttt{shortlabels} 
+option so that the item labels can be customized easily by selecting 
+\texttt{A}, \texttt{a}, \texttt{I}, \texttt{i}, or \texttt{1} and inserting 
+whatever delimiters you want.
+\Needspace*{7\baselineskip}
+\begin{Verbatim}[frame = lines, framesep = 2ex, fontsize = \small,
+    label = {Example using `enumitem'}]
+\begin{enumerate}[\bfseries a.]
+	\item First item
+	\item Second item
+	\item Third item
+\end{enumerate}
+\end{Verbatim}
+Output:
+\Needspace*{6\baselineskip}
+\begin{shaded*}
+\begin{enumerate}[\bfseries a., labelsep=*]
+	\item First item
+	\item Second item
+	\item Third item
+\end{enumerate}
+\end{shaded*}
+%
+\subsubsection{Mathematics Packages}
+%
+\DescribePackage%
+{http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/mathtools/mathtools.pdf}
+{mathtools}
+This package is an extension to the standard
+\href{http://mirror.utexas.edu/ctan/macros/latex/required/amsmath/amsmath.pdf}
+{\texttt{amsmath}}
+package. It loads the \texttt{amsmath} package, and also defines many useful 
+and convenient macros and environments. For example, it provides the ``colon 
+equals'' symbol $\coloneqq$ which I use frequently. It also allows for 
+``cramped'' math, i.e. the \verb|\cramped{}| command changes $2^{2^2}$ to 
+$\cramped{2^{2^2}}$. Refer to the documentation for a full description of its 
+features.
+
+\DescribePackage%
+{http://ctan.mackichan.com/macros/latex/required/amscls/doc/amsthdoc.pdf}
+{amsthm}
+This package provides environments such as the \texttt{theorem} and 
+\texttt{proof} environments. It also provides a method of creating new 
+theorem-like environments by defining a |\theoremstyle| and creating a 
+|\newtheorem|. See \hyperref[feat:theoremstyles]{below} for an example of this.
+
+\DescribePackage%
+{http://ctan.math.utah.edu/ctan/tex-archive/fonts/amsfonts/doc/amsfndoc.pdf}
+{amssymb}
+This package offers additional symbols to use in math mode. A complete list of 
+these symbols can be found \href%
+{http://milde.users.sourceforge.net/LUCR/Math/mathpackages/amssymb-symbols.pdf}
+{here}.
+
+\DescribePackage%
+{http://ctan.mirrors.hoobly.com/fonts/doublestroke/dsdoc.pdf}
+{dsfont}
+This package provides double stroke letters to be used in math mode, such as
+the natural numbers ($\N$), which is typeset with |\mathds{N}|. Several of
+these are called with macros defined in the preamble, so we can achieve the 
+following outputs:
+\begin{center}
+\begin{tabular}{c|c}
+Command & Output \\ \hline
+|\N| & $\N$ \\
+|\Z| & $\Z$ \\
+|\Q| & $\Q$ \\
+|\R| & $\R$ \\
+|\C| & $\C$ \\
+|\H| & $\H$ \\
+|\F| & $\F$ \\
+\end{tabular}
+\end{center}
+
+\DescribePackage%
+{http://ctan.mackichan.com/macros/latex/contrib/jknappen/mathrsfs.rme}
+{mathrsfs}
+This package provides script lettering to be used in math mode. For example, 
+|\mathscr{ABC}| produces $\mathscr{ABC}$.
+
+\DescribePackage%
+{http://ctan.mackichan.com/macros/latex/contrib/cancel/cancel.pdf}
+{cancel}
+This package offers the \verb|\cancel{}| and \verb|\cancelto{}{}| commands (and 
+a few others) which nicely draw a line through math expressions, and possibly 
+draws an arrow to another value.
+\Needspace*{5\baselineskip}
+\begin{Verbatim}[frame = lines, framesep = 2ex, fontsize = \small,
+    label = {Example using `cancel'}]
+\[ \frac{x^2 - 4}{x+2}
+= \frac{(x - 2)\cancelto{1}{(x + 2)}}{\cancel{x + 2}}
+= x - 2. \]
+\end{Verbatim}
+Output:
+\Needspace*{1in}
+\begin{shaded*}
+\[ \frac{x^2 - 4}{x+2}
+= \frac{(x - 2)\cancelto{1}{(x + 2)}}{\cancel{x + 2}}
+= x - 2. \]
+\end{shaded*}
+
+\DescribePackage%
+{http://ctan.sharelatex.com/tex-archive/macros/latex/required/tools/array.pdf}
+{array}
+This package offers many helpful customization tools for \texttt{tabular} and 
+\texttt{array} environments. This preamble uses the |\extrarowheight| parameter 
+to add some height to each row in a \texttt{tabular} or \texttt{array} 
+environment. Usually, if horizontal lines are used, then capital letters may 
+touch the lines. This preamble defines |\extrarowheight| to be \texttt{1pt}, 
+which gives enough buffer for letters to have space between horizontal lines 
+and still look natural. Here is an example to show this difference:
+\Needspace*{1in}
+\begin{shaded*}
+\begin{center}
+\setlength{\extrarowheight}{0pt}
+\begin{tabular}{|c|}
+\hline
+I FEEL A LITTLE SQUISHED \\ \hline
+\end{tabular} \\[1em]
+\setlength{\extrarowheight}{1pt}
+\begin{tabular}{|c|}
+\hline
+THIS IS BETTER \\ \hline
+\end{tabular}
+\end{center}
+\end{shaded*}
+
+\DescribePackage%
+{http://ctan.mirrors.hoobly.com/macros/latex/contrib/arydshln/arydshln-man.pdf}
+{arydshln}
+This package (read ``array dashed lines'') allows the user to use dashed lines 
+in \texttt{tabular} and \texttt{array} environments. For vertical dashed lines, 
+use the \texttt{:} option in place of \texttt{\symbol{"007C}}. For horizontal 
+dashed lines, use |\hdashline| in place of |\hline|.
+\Needspace*{6\baselineskip}
+\begin{Verbatim}[frame = lines, framesep = 2ex, fontsize = \small,
+    label = {Example using `arydshln'}]
+\begin{tabular}{::l:c|r||}
+Here is & an & example \\ \hdashline
+Using & dashed & lines \\ \hline
+\end{tabular}
+\end{Verbatim}
+Output:
+\Needspace*{1in}
+\begin{shaded*}
+\begin{center}
+\begin{tabular}{::l:c|r||}
+Here is & an & example \\ \hdashline
+Using & dashed & lines \\ \hline
+\end{tabular}
+\end{center}
+\end{shaded*}
+
+\DescribePackage%
+{http://get-software.net/macros/latex/contrib/relsize/relsize-doc.pdf}
+{relsize}
+This package allows the user to change the size of math or text relative to 
+what the current size is. For example, you can put an entire math expression 
+inside of the |\mathlarger{}| command to increase the overall size for 
+readability.
+\Needspace*{5\baselineskip}
+\begin{Verbatim}[frame = lines, framesep = 2ex, fontsize = \small,
+    label = {Example using `relsize'}]
+\[ \mathlarger{
+	\frac{x + \frac{3}{2e^y}}{x^{2y-1}}
+	} \]
+\end{Verbatim}
+Output:
+\Needspace*{1in}
+\begin{shaded*}
+\[ \text{Before:}\quad \frac{x + \frac{3}{2e^y}}{x^{2y-1}} \qquad\qquad
+\text{After:} \quad
+\mathlarger{
+	\frac{x + \frac{3}{2e^y}}{x^{2y-1}}
+	} \]
+\end{shaded*}
+
+%\DescribePackage%
+%{arg1}
+%{arg2}
+%
+\subsubsection{Graphics and Plotting Packages}
+%
+\DescribePackage%
+{http://ctan.math.utah.edu/ctan/tex-archive/macros/latex/contrib/xcolor/xcolor.pdf}
+{xcolor}
+This package gives the user access to a wider range of predefined colors, as 
+well as several options for defining your own colors. This package is loaded 
+with the \texttt{dvipsnames} option to load the 68 standard colors known to 
+\texttt{dvips}:
+\begin{center}
+%\small \ttfamily
+\begin{longtable}{|l|p{0.7cm}||l|p{0.7cm}||l|p{0.7cm}|}%
+\hline
+Name & Col & Name & Col & Name & Col \\ \hline \hline
+Apricot & \myrule{Apricot} & Aquamarine & \myrule{Aquamarine} & Bittersweet & 
+\myrule{Bittersweet} \\ \hline
+Black & \myrule{Black} & Blue & \myrule{Blue} & BlueGreen & \myrule{BlueGreen} 
+\\ \hline
+BlueViolet & \myrule{BlueViolet} & BrickRed & \myrule{BrickRed} & Brown & 
+\myrule{Brown} \\ \hline
+BurntOrange & \myrule{BurntOrange} & CadetBlue & \myrule{CadetBlue} & 
+CarnationPink & \myrule{CarnationPink} \\ \hline
+Cerulean & \myrule{Cerulean} & CornflowerBlue & \myrule{CornflowerBlue} & Cyan 
+& \myrule{Cyan} \\ \hline
+Dandelion & \myrule{Dandelion} & DarkOrchid & \myrule{DarkOrchid} & Emerald & 
+\myrule{Emerald} \\ \hline
+ForestGreen & \myrule{ForestGreen} & Fuchsia & \myrule{Fuchsia} & Goldenrod & 
+\myrule{Goldenrod} \\ \hline
+Gray & \myrule{Gray} & Green & \myrule{Green} & GreenYellow & 
+\myrule{GreenYellow} \\ \hline
+JungleGreen & \myrule{JungleGreen} & Lavender & \myrule{Lavender} & LimeGreen & 
+\myrule{LimeGreen} \\ \hline
+Magenta & \myrule{Magenta} & Mahogany & \myrule{Mahogany} & Maroon & 
+\myrule{Maroon} \\ \hline
+Melon & \myrule{Melon} & MidnightBlue & \myrule{MidnightBlue} & Mulberry & 
+\myrule{Mulberry} \\ \hline
+NavyBlue & \myrule{NavyBlue} & OliveGreen & \myrule{OliveGreen} & Orange & 
+\myrule{Orange} \\ \hline
+OrangeRed & \myrule{OrangeRed} & Orchid & \myrule{Orchid} & Peach & 
+\myrule{Peach} \\ \hline
+Periwinkle & \myrule{Periwinkle} & PineGreen & \myrule{PineGreen} & Plum & 
+\myrule{Plum} \\ \hline
+ProcessBlue & \myrule{ProcessBlue} & Purple & \myrule{Purple} & RawSienna & 
+\myrule{RawSienna} \\ \hline
+Red & \myrule{Red} & RedOrange & \myrule{RedOrange} & RedViolet & 
+\myrule{RedViolet} \\ \hline
+Rhodamine & \myrule{Rhodamine} & RoyalBlue & \myrule{RoyalBlue} & RoyalPurple & 
+\myrule{RoyalPurple} \\ \hline
+RubineRed & \myrule{RubineRed} & Salmon & \myrule{Salmon} & SeaGreen & 
+\myrule{SeaGreen} \\ \hline
+Sepia & \myrule{Sepia} & SkyBlue & \myrule{SkyBlue} & SpringGreen & 
+\myrule{SpringGreen} \\ \hline
+Tan & \myrule{Tan} & TealBlue & \myrule{TealBlue} & Thistle & \myrule{Thistle} 
+\\ \hline
+Turquoise & \myrule{Turquoise} & Violet & \myrule{Violet} & VioletRed & 
+\myrule{VioletRed} \\ \hline
+White & \myrule{White} & WildStrawberry & \myrule{WildStrawberry} & Yellow & 
+\myrule{Yellow} \\ \hline
+YellowGreen & \myrule{YellowGreen} & YellowOrange & \myrule{YellowOrange} & & 
+\\ \hline
+\end{longtable}
+\end{center}
+To define a color, use |\definecolor{name}{model}{color-spec}|. For example, 
+the background color to the output samples in this document was defined with
+\begin{verbatim}
+\definecolor{shadecolor}{RGB}{242,242,200}
+\end{verbatim}
+%
+\subsubsection{Uncategorized Packages}
+%
+\end{document}

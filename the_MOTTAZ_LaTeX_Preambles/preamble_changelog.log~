@@ -1,0 +1,23 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CHANGE LOG/RELEASE NOTES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NEWEST CHANGES FOR THE HOMEWORK EDITION:
+(* indicates a big/important change)
+
+--------
+2.01    |
+--------------------------------------------------------------------------------
+    1. Redefined '\mid' to autoscale to the same size as the delimiters
+        surrounding it.
+    2. Added the operator '\Frac' for the field of fractions.
+    3. Added operators '\ann', '\tor', '\End', and '\bigboxplus'
+   *4. Redefined the delimiters using the '\DeclarePairedDelimiter{}' command
+        from the 'mathtools' package, and switched definitions of starred
+        versions so that non-starred versions auto-scale, and starred versions
+        do not.
+    5. Added command '\divides', which places a vertical bar with nice spacing
+        into math environments. This bar is slightly longer than the height
+        of normal ordinals, so that
+            \abs{A} \divides \abs{B}
+        looks nice. There is also a negated version: '\ndivides'.
+--------------------------------------------------------------------------------

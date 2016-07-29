@@ -1,0 +1,45 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CHANGE LOG/RELEASE NOTES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NEWEST CHANGES FOR THE QUIZ EDITION:
+(* indicates a big/important change)
+
+--------
+1.2    |
+--------------------------------------------------------------------------------
+    1. Added the 'Soc' operator (\soc) for the socle of a module.
+    2. Changed '\mpar{}' definition to include \raggedright formatting.
+--------------------------------------------------------------------------------
+
+OLD CHANGE LOGS FOR THE QUIZ EDITION:
+(* indicates a big/important change)
+
+--------
+1.1    |
+--------------------------------------------------------------------------------
+    1. Added the envionments: 'Definition', 'Example', 'Solution', 'Case'.
+   *2. This project is now using the LPPL license. See the README.
+    3. Changed page dimensions.
+    4. Now using the 'geometry' package to define page dimensions.
+    5. Added the 'arrows' tikzlibrary.
+    6. Removed the 'imakeidx' package. Quizzes don't have indices.
+    7. Added the 'tikz-cd' package.
+   *8. Redefined the delimiters using the '\DeclarePairedDelimiter{}' command
+        from the 'mathtools' package, and switched definitions of starred
+        versions so that non-starred versions auto-scale, and starred versions
+        do not.
+    9. Moved the definition of 'bar' to the 'Functions' section.
+   10. Added operators '\Frac', '\ann', '\tor', '\End', '\bigboxplus',
+        '\divides', and '\ndivides'.
+   11. Changed '\def' to '\newcommand' in definition of header.
+   12. Added the 'note' theoremstyle from the HOMEWORK edition.
+   13. Added the 'Hom' operator.
+   14. Added a couple of necessary lines that are used when creating the format
+        file.
+--------------------------------------------------------------------------------
+
+--------
+1.0    |
+--------------------------------------------------------------------------------
+    1. This preamble is brand new. Tell me what you think!
+--------------------------------------------------------------------------------

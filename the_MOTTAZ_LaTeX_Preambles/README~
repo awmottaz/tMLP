@@ -1,0 +1,77 @@
+--------------------------------------------------------------------------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--------------------------------------------------------------------------------
+|&|                                                                          |&|
+|&|                   the MOTTAZ STANDARD LaTeX PREAMBLES                    |&|
+|&|                                                                          |&|
+--------------------------------------------------------------------------------
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+--------------------------------------------------------------------------------
+ABOUT
+=====
+        EDITION         VERSION         DATE
+        --------------------------------------------
+        HOMEWORK        v2.01           TBD
+        QUIZ            v1.01           TBD
+        NOTES           v1.00           TBD
+        --------------------------------------------
+    AUTHOR: Anthony Mottaz
+    EMAIL:  anthonywmottaz@gmail.com
+    INTRO:  This README is a jump start guide to using the various preambles in
+            this collection. Refer to the log files for changes and updates for
+            each preamble in this collection.
+
+    LICENSE:    This project is released under the LaTeX Project Public
+                License, v1.3c or later. See
+
+                   http://www.latex-project.org/lppl.txt
+
+HOW TO USE
+==========
+    1. Save the file '<edition>_preamble.tex' to your system.
+    2. In your LaTeX document, before '\begin{document}', insert the following:
+
+            \input{/path/to/<edition>_preamble.tex}
+
+        where '/path/to/<edition>_preamble.tex' is the location of
+        '<edition>_preamble.tex' on your system.
+    3. If applicable, be sure to set the content in the header of your document.
+    4. If you obtain errors in your first compilation, then look in the POSSIBLE
+        ISSUES section below for a solution. If your error is not addressed
+        there, please email me with a description of the problem that arose.
+    5. A thorough usage guide is provided (Usage_Guide.pdf) for your reference.
+
+POSSIBLE ISSUES
+===============
+    - The following packages are required by some preambles, and may not already
+      be installed on your LaTeX system.
+        * pgfplots version 1.10
+        * arydshln
+        * greek-fontenc
+        * babel-greek
+        * cbfonts
+        * cbfonts-fd
+        * signchart
+
+    - If you change the font, you might get one of several warnings:
+        * 'No room for a new \mathgroup' => I have not found a solution to
+            this error. If you know one, please let me know. Otherwise, you
+            must choose a different font.
+        * 'auto expansion is only possible with scalable fonts' => This error
+            is caused by the package 'microtype'. To use the font, simply
+            comment out this line in the preamble:
+                \usepackage{microtype}
+
+    - DO NOT change the order in which packages are loaded. The order matters
+        when setting up options and considering dependencies. If you change
+        the order in which packages are loaded, you may get several errors
+        such as an option clash or double-defining a command.
+
+THANKS
+======
+    - A special thanks to Aaron Zolotor for his help in the initial progress and
+        development of the preamble. He continues to put up with my ramblings
+        about different features I want to add, suggests features of his own,
+        and provides very useful feedback.                                                                    	|
+    - Thanks to Mac Gallagher for sharing with me the preambles he uses. Nearly
+        all of the additions in version 1.5 were due to his input.
